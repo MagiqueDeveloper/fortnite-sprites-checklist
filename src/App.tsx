@@ -203,7 +203,6 @@ export default function App(): ReactNode {
         >
           Reset
         </button>
-        <span className="hint">Ticks save in this browser and print exactly as shown</span>
       </div>
 
       <main className="sheet" ref={sheetRef}>

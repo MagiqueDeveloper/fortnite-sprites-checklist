@@ -14,7 +14,6 @@
            border:1px solid var(--ink); background:var(--ink); color:#fff; cursor:pointer}
   .toolbar button:hover{transform:translateY(-1px)}
   .toolbar button.ghost{background:#fff; color:var(--ink); border-color:var(--line)}
-  .toolbar .hint{font-size:10px; color:var(--muted); margin-left:2px; max-width:112px; line-height:1.25}
 
   .sheet{width:210mm; min-height:297mm; margin:0 auto; background:#fff; padding:8mm;
          box-shadow:0 10px 40px rgba(20,24,40,.18); border-radius:2px; display:flex; flex-direction:column}
