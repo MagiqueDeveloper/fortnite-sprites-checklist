@@ -135,9 +135,7 @@ function UnreleasedCard({ sprite }: { sprite: UnreleasedSprite }): ReactNode {
       <div className="ucardtxt">
         <div className="n">{sprite.name}</div>
         <div className="ubadge">
-          <span className={`badge ${sprite.badge}`}>
-            {sprite.badge === 'new' ? 'New in v42.20' : sprite.by}
-          </span>
+          <span className={`badge ${sprite.badge}`}>{sprite.label}</span>
         </div>
       </div>
     </div>

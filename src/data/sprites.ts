@@ -22,6 +22,8 @@ export interface UnreleasedSprite {
   name: string;
   img: string | null;
   badge: 'new' | 'das';
+  /** Badge text: the creator credit for Design-A-Sprite, or the status for crossovers. */
+  label: string;
   by: string;
   tip: string;
 }
@@ -53,6 +55,7 @@ export const FAMILIES: SpriteFamily[] = [
   {"id": "bush", "name": "Bush", "rarity": "Rare", "ability": "Puts a Bush on you after a duration; at level 5 you gain a Bush after eliminations", "variants": ["base", "cm", "gold", "lh"], "imgs": ["sprites/bush/base.png", "sprites/bush/cheat-master.png", "sprites/bush/gold.png", "sprites/bush/loot-hacker.png"]},
   {"id": "adventure", "name": "Adventure", "rarity": "Rare", "ability": "Upgrades a random item in your inventory each time you level it up", "variants": ["base", "cm", "gold", "lh"], "imgs": ["sprites/adventure/base.png", "sprites/adventure/cheat-master.png", "sprites/adventure/gold.png", "sprites/adventure/loot-hacker.png"]},
   {"id": "jonesy", "name": "Jonesy", "rarity": "Rare", "ability": "Slowly recovers some Health and Shield for a short duration after taking damage", "variants": ["base", "cm", "gold", "lh"], "imgs": ["sprites/jonesy/base.png", "sprites/jonesy/cheat-master.png", "sprites/jonesy/gold.png", "sprites/jonesy/loot-hacker.png"]},
+  {"id": "pond", "name": "Pond", "rarity": "Rare", "ability": "Jump shortly after landing to launch a Super Jump, higher and more often with each Sprite Level", "variants": ["base"], "imgs": ["sprites/pond/base.png"]},
   {"id": "sonic", "name": "Sonic", "rarity": "Epic", "ability": "Increases Sprint speed", "variants": ["base", "cm", "gold", "lh"], "imgs": ["sprites/sonic/base.png", "sprites/sonic/cheat-master.png", "sprites/sonic/gold.png", "sprites/sonic/loot-hacker.png"]},
   {"id": "tails", "name": "Tails", "rarity": "Epic", "ability": "Allows you to hover for a short duration", "variants": ["base", "cm", "gold", "lh"], "imgs": ["sprites/tails/base.png", "sprites/tails/cheat-master.png", "sprites/tails/gold.png", "sprites/tails/loot-hacker.png"]},
   {"id": "shadow", "name": "Shadow", "rarity": "Epic", "ability": "Automatically reloads your weapons over time, even when unequipped", "variants": ["base", "cm", "gold", "lh"], "imgs": ["sprites/shadow/base.png", "sprites/shadow/cheat-master.png", "sprites/shadow/gold.png", "sprites/shadow/loot-hacker.png"]},
@@ -65,11 +68,10 @@ export const FAMILIES: SpriteFamily[] = [
 ] as SpriteFamily[];
 
 export const UNRELEASED: UnreleasedSprite[] = [
-  {"name": "Crash Bandicoot", "img": "sprites/unreleased/crash-bandicoot.png", "badge": "new", "by": "", "tip": "Jump in air to trigger a whirlwind attack that damages and knocks back nearby enemies"},
-  {"name": "Morgana", "img": "sprites/unreleased/morgana.png", "badge": "new", "by": "", "tip": "Increases the effectiveness of healing items, scaling with each level up. Persona 5 crossover"},
-  {"name": "Blinky", "img": "sprites/unreleased/blinky.png", "badge": "new", "by": "", "tip": "Found at night. Grants a temporary cloak when you take damage. Pac-Man crossover"},
-  {"name": "Birthday", "img": "sprites/unreleased/birthday.png", "badge": "new", "by": "", "tip": "Opening chests has a chance to spawn a piece of cake; eliminations can spawn cake at max level"},
-  {"name": "Pond", "img": null, "badge": "das", "by": "By Pine & Kiri", "tip": "Super Jump on landing. Design-A-Sprite Contest winner"},
-  {"name": "Dumpster Dive", "img": null, "badge": "das", "by": "By StinkyPrincessGoose", "tip": "Design-A-Sprite Contest winner"},
-  {"name": "Honey", "img": null, "badge": "das", "by": "By Conejito_sam", "tip": "Design-A-Sprite Contest winner. Bees swarm attackers"},
+  {"name": "Crash Bandicoot", "img": "sprites/unreleased/crash-bandicoot.png", "badge": "new", "by": "", "tip": "Jump in air to trigger a whirlwind attack that damages and knocks back nearby enemies", "label": "New in v42.20"},
+  {"name": "Morgana", "img": "sprites/unreleased/morgana.png", "badge": "new", "by": "", "tip": "Increases the effectiveness of healing items, scaling with each level up. Persona 5 crossover", "label": "Not in v42.20"},
+  {"name": "Blinky", "img": "sprites/unreleased/blinky.png", "badge": "new", "by": "", "tip": "Found at night. Grants a temporary cloak when you take damage. Pac-Man crossover", "label": "New in v42.20"},
+  {"name": "Birthday", "img": "sprites/unreleased/birthday.png", "badge": "new", "by": "", "tip": "Opening chests has a chance to spawn a piece of cake; eliminations can spawn cake at max level", "label": "Live Sep 26"},
+  {"name": "Dumpster Dive", "img": null, "badge": "das", "by": "By StinkyPrincessGoose", "tip": "Design-A-Sprite Contest winner", "label": "By StinkyPrincessGoose"},
+  {"name": "Honey", "img": null, "badge": "das", "by": "By Conejito_sam", "tip": "Design-A-Sprite Contest winner. Bees swarm attackers", "label": "By Conejito_sam"},
 ] as UnreleasedSprite[];
