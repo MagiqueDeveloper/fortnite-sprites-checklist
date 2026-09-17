@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { printSheet } from './printSheet';
 import {
   FAMILIES,
   RARITY_COLOURS,
@@ -13,6 +14,9 @@ import {
 } from './data/sprites';
 
 const A4_WIDTH_PX = 794; // 210mm at 96dpi
+
+// Sprite paths in data/sprites.ts are relative to the deployed base URL.
+const asset = (path: string): string => `${import.meta.env.BASE_URL}${path}`;
 
 type ToggleTick = (id: string, kind: TickKey) => void;
 
@@ -75,7 +79,7 @@ function SpriteCard({ family, variant, index, ticks, onToggle }: SpriteCardProps
     <div className="card" title={`${name} · ${family.ability}`}>
       <span className="icon">
         <img
-          src={family.imgs[index]}
+          src={asset(family.imgs[index])}
           alt={name}
           loading="eager"
           onError={(event) => {
@@ -128,7 +132,7 @@ function Family({ family, ticks, onToggle }: FamilyProps): ReactNode {
 function UnreleasedCard({ sprite }: { sprite: UnreleasedSprite }): ReactNode {
   return (
     <div className="ucard" title={sprite.tip}>
-      {sprite.img ? <img src={sprite.img} alt={sprite.name} /> : <span className="q">?</span>}
+      {sprite.img ? <img src={asset(sprite.img)} alt={sprite.name} /> : <span className="q">?</span>}
       <div className="ucardtxt">
         <div className="n">{sprite.name}</div>
         <div className="ubadge">
@@ -182,7 +186,13 @@ export default function App(): ReactNode {
   return (
     <>
       <div className="toolbar no-print">
-        <button type="button" onClick={() => window.print()}>
+        <button
+          type="button"
+          onClick={() => {
+            const sheet = sheetRef.current;
+            if (sheet) void printSheet(sheet);
+          }}
+        >
           Print A4
         </button>
         <button
