@@ -4,8 +4,6 @@ A printable A4 checklist for every Sprite variant in Fortnite Chapter 7 Season 4
 
 **Live:** https://magiquedeveloper.github.io/fortnite-sprites-checklist/
 
-![Preview of the checklist](docs/preview.png)
-
 ## Features
 
 - **61 collectible Sprites** across 16 families (base, Cheat Master, Gold and Loot Hacker variants) ordered by rarity left to right
@@ -50,8 +48,6 @@ public/sprites/            65 sprite images, sorted by family
   overshield/base.png      released variants: base, cheat-master, gold, loot-hacker
   x-ray/base.png
   unreleased/blinky.png    v42.20 crossover Sprites
-reference/                 Original physical checklist that inspired the layout, plus an A4 export
-docs/preview.png           Screenshot used above
 .github/workflows/deploy.yml   Type-checks, builds and publishes dist/ to GitHub Pages
 ```
 

@@ -3,3 +3,7 @@ dist
 .venv
 .DS_Store
 *.log
+
+# kept locally only, not part of the published site
+reference/
+docs/
