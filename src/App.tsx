@@ -108,7 +108,6 @@ function Family({ family, ticks, onToggle }: FamilyProps): ReactNode {
   return (
     <div className="fam" style={{ '--rar': RARITY_COLOURS[family.rarity] } as CSSProperties}>
       <div className="famhead">
-        <i className="pip" />
         <h2>{family.name}</h2>
         <i className="rule" />
         <span className="rar">{family.rarity.toUpperCase()}</span>
@@ -240,9 +239,6 @@ export default function App(): ReactNode {
             {UNRELEASED.map((sprite) => (
               <UnreleasedCard key={sprite.name} sprite={sprite} />
             ))}
-          </div>
-          <div className="unfoot">
-            Not yet obtainable. Purple: new in v42.20 · Green: Design-A-Sprite Contest winner.
           </div>
         </section>
 
