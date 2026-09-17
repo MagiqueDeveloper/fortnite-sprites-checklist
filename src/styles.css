@@ -65,7 +65,7 @@
   .unhead .rar{font-size:7.5px; font-weight:900; letter-spacing:.08em; color:var(--ghost)}
   .wincards{display:grid; grid-template-columns:repeat(4,1fr); gap:4px}
   .ucard{border:1px dashed #c6ccd6; border-radius:6px; padding:4px 6px; display:flex; gap:6px;
-        align-items:center; background:#fafbfc; min-width:0}
+        align-items:center; background:transparent; min-width:0}
   .ucard img{width:22px; height:22px; object-fit:contain; flex:0 0 22px}
   .badge{display:inline-block; font-size:5.9px; font-weight:900; letter-spacing:.11em; text-transform:uppercase;
          background:#fff; border:1px solid currentColor; border-radius:3px; padding:1.2px 4.5px 1px;
