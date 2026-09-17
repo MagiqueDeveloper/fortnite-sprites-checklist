@@ -1,17 +1,39 @@
-import { useEffect, useRef, useState } from 'react';
-import { FAMILIES, RARITY_COLOURS, STORAGE_KEY, UNRELEASED, VARIANTS } from './data/sprites.js';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import {
+  FAMILIES,
+  RARITY_COLOURS,
+  STORAGE_KEY,
+  UNRELEASED,
+  VARIANTS,
+  type SpriteFamily,
+  type TickKey,
+  type TickMap,
+  type UnreleasedSprite,
+  type VariantKey,
+} from './data/sprites';
 
 const A4_WIDTH_PX = 794; // 210mm at 96dpi
 
-function readTicks() {
+type ToggleTick = (id: string, kind: TickKey) => void;
+
+function readTicks(): TickMap {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as TickMap) : {};
   } catch {
     return {};
   }
 }
 
-function Tick({ id, kind, label, on, onToggle }) {
+interface TickProps {
+  id: string;
+  kind: TickKey;
+  label: string;
+  on: boolean;
+  onToggle: ToggleTick;
+}
+
+function Tick({ id, kind, label, on, onToggle }: TickProps): ReactNode {
   return (
     <span
       className={`chk${on ? ' on' : ''}`}
@@ -35,11 +57,19 @@ function Tick({ id, kind, label, on, onToggle }) {
   );
 }
 
-function SpriteCard({ family, variant, index, ticks, onToggle }) {
+interface SpriteCardProps {
+  family: SpriteFamily;
+  variant: VariantKey;
+  index: number;
+  ticks: TickMap;
+  onToggle: ToggleTick;
+}
+
+function SpriteCard({ family, variant, index, ticks, onToggle }: SpriteCardProps): ReactNode {
   const meta = VARIANTS[variant];
   const id = `${family.id}__${variant}`;
   const name = meta.label(family.name);
-  const row = ticks[id] || {};
+  const row = ticks[id] ?? {};
 
   return (
     <div className="card" title={`${name} · ${family.ability}`}>
@@ -56,17 +86,23 @@ function SpriteCard({ family, variant, index, ticks, onToggle }) {
       <div className="meta">
         <div className={`name${meta.cls ? ' ' + meta.cls : ''}`}>{name}</div>
         <div className="checks">
-          <Tick id={id} kind="f" label="Found" on={!!row.f} onToggle={onToggle} />
-          <Tick id={id} kind="m" label="Mastered" on={!!row.m} onToggle={onToggle} />
+          <Tick id={id} kind="f" label="Found" on={Boolean(row.f)} onToggle={onToggle} />
+          <Tick id={id} kind="m" label="Mastered" on={Boolean(row.m)} onToggle={onToggle} />
         </div>
       </div>
     </div>
   );
 }
 
-function Family({ family, ticks, onToggle }) {
+interface FamilyProps {
+  family: SpriteFamily;
+  ticks: TickMap;
+  onToggle: ToggleTick;
+}
+
+function Family({ family, ticks, onToggle }: FamilyProps): ReactNode {
   return (
-    <div className="fam" style={{ '--rar': RARITY_COLOURS[family.rarity] }}>
+    <div className="fam" style={{ '--rar': RARITY_COLOURS[family.rarity] } as CSSProperties}>
       <div className="famhead">
         <i className="pip" />
         <h2>{family.name}</h2>
@@ -89,7 +125,7 @@ function Family({ family, ticks, onToggle }) {
   );
 }
 
-function UnreleasedCard({ sprite }) {
+function UnreleasedCard({ sprite }: { sprite: UnreleasedSprite }): ReactNode {
   return (
     <div className="ucard" title={sprite.tip}>
       {sprite.img ? <img src={sprite.img} alt={sprite.name} /> : <span className="q">?</span>}
@@ -105,22 +141,22 @@ function UnreleasedCard({ sprite }) {
   );
 }
 
-export default function App() {
-  const [ticks, setTicks] = useState(readTicks);
-  const sheetRef = useRef(null);
+export default function App(): ReactNode {
+  const [ticks, setTicks] = useState<TickMap>(readTicks);
+  const sheetRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(ticks));
     } catch {
-      /* storage unavailable (private mode, file:// restrictions) */
+      /* storage unavailable (private mode, restricted origins) */
     }
   }, [ticks]);
 
   // The sheet is always a true A4 page: narrow viewports scale it instead of reflowing,
   // so what you see on screen is exactly what prints.
   useEffect(() => {
-    const fit = () => {
+    const fit = (): void => {
       const sheet = sheetRef.current;
       if (!sheet) return;
       const available = document.documentElement.clientWidth - 24;
@@ -131,14 +167,15 @@ export default function App() {
     return () => window.removeEventListener('resize', fit);
   }, []);
 
-  const toggle = (id, kind) =>
+  const toggle: ToggleTick = (id, kind) => {
     setTicks((prev) => {
-      const row = { ...(prev[id] || {}) };
+      const row = { ...(prev[id] ?? {}) };
       row[kind] = !row[kind];
       if (kind === 'm' && row.m) row.f = true;
       if (kind === 'f' && !row.f) row.m = false;
       return { ...prev, [id]: row };
     });
+  };
 
   const total = FAMILIES.reduce((sum, family) => sum + family.variants.length, 0);
 
