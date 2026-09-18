@@ -13,6 +13,8 @@ A printable A4 checklist for every Sprite variant in Fortnite Chapter 7 Season 4
 - **Misc section** under the black rule for released Sprites that ship without variants
 - **Unreleased section** for announced Sprites, badged with their status
 - **Fully offline:** all 75 sprite images ship in `public/sprites/`, so the page makes no external requests
+- **Offline ready after the first visit:** a service worker precaches the shell and every sprite, so later visits work with no connection at all
+- **Installable:** a web app manifest with icons, so it can be added to a phone home screen or desktop as its own window
 - **Self-fitting names:** long variants such as "Loot Hacker Crash Bandicoot" shrink to stay on one line
 
 Keyboard accessible: each tick box is a focusable `role="checkbox"` that responds to Space and Enter.
@@ -37,6 +39,19 @@ npm run preview          # or: npx serve dist
 ```
 
 Browsers refuse to load ES modules from `file://` URLs, so serve `dist/` with any static server rather than double-clicking `index.html`. The deployed GitHub Pages build is self-contained for the same reason: once the page and its assets have loaded, it needs no network access.
+
+### Offline caching and install
+
+`public/sw.js` registers a service worker (production builds only, via `src/lib/registerServiceWorker.ts`):
+
+- **Install** precaches the app shell: `./`, `index.html` and the manifest.
+- **Static assets** (the hashed JS and CSS, the sprite PNGs, the icons) are served cache-first and stored the first time they are fetched. Because the page renders every Sprite, one normal visit ends up with all 75 images cached.
+- **Navigations** are network-first, so a redeploy is picked up while online, and fall back to the cached shell when there is no connection.
+- Old caches are deleted on activate; bump `CACHE_VERSION` in `sw.js` to retire them after a breaking change.
+
+The result: visit once online, then the checklist opens and prints with the network switched off. Clearing site data (or unregistering the worker in DevTools → Application) removes the cached copy.
+
+`public/manifest.webmanifest` plus `public/icon-192.png`, `icon-512.png` and `icon-maskable-512.png` make it installable: use the browser's Install or Add to Home Screen action for a standalone window that launches from the cache.
 
 ## Printing
 
@@ -70,6 +85,7 @@ src/
   lib/
     printSheet.ts              Clone the sheet into an off-screen document and print it
     asset.ts                   Resolve data paths against the deploy base URL
+    registerServiceWorker.ts   Register the offline worker in production builds
   styles/
     index.css                  Ordered entry point for the stylesheets below
     base.css                   Design tokens and page defaults
@@ -79,6 +95,9 @@ src/
     sections.css               Misc and Unreleased sections, badges
     print.css                  @page and @media print rules
 public/sprites/                75 sprite images, sorted by family
+public/sw.js                   Offline service worker: precaches the shell, cache-first assets
+public/manifest.webmanifest    Installable app manifest
+public/icon-192.png            App icons (192, 512 and a maskable 512)
 .github/workflows/deploy.yml   Type-checks, builds and publishes dist/ to GitHub Pages
 ```
 
