@@ -1,0 +1,17 @@
+/* Design tokens and page-level defaults. */
+
+:root{
+  --ink:#171a21; --muted:#6b7280; --line:#e2e5ea; --soft:#f4f5f7;
+  --rare:#2f7fe4; --epic:#9b4dff; --leg:#ff9d2e; --myth:#ff4d6d; --ghost:#5b6472;
+  --cheat:#1f9d3a; --gold:#b8860b; --lh:#d92e50;
+}
+
+*{box-sizing:border-box; margin:0; padding:0}
+
+html,body{background:#eceef1}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink);
+  padding:76px 12px 44px; /* clears the floating toolbar */
+}

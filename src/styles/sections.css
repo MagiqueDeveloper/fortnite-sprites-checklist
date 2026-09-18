@@ -1,0 +1,43 @@
+/* The two tail sections: released single-variant Sprites, then unreleased ones. */
+
+/* misc: released Sprites that ship without variants, introduced by the black rule */
+.misc{break-inside:avoid; margin-top:3.4mm; border-top:2px solid var(--ink); padding-top:2.2mm}
+.misc .unhead .bar{background:var(--ink)}
+.singlecards{display:grid; grid-template-columns:repeat(4,1fr); gap:1.5mm}
+/* the family header sits inside the card, in place of a plain title */
+.singlecards .famhead{margin-bottom:0; gap:5px}
+.singlecards .famhead h2{font-size:9.2px}
+.singlecards .famhead .rar{font-size:6.4px}
+
+.unreleased{break-inside:avoid; margin-top:3.4mm; border-top:1px solid var(--line); padding-top:2.2mm}
+.unhead{display:flex; align-items:center; gap:5px; margin-bottom:1.8mm}
+.unhead .bar{width:3.2px; height:12px; border-radius:2px; background:var(--ghost)}
+.unhead h2{font-size:10px; font-weight:900; text-transform:uppercase; letter-spacing:.05em; flex:1}
+.unhead .rar{font-size:7.5px; font-weight:900; letter-spacing:.08em; color:var(--ghost)}
+
+.wincards{display:grid; grid-template-columns:repeat(4,1fr); gap:4px}
+.ucard{
+  border:1px dashed #c6ccd6; border-radius:6px; padding:4px 6px; display:flex; gap:6px;
+  align-items:center; background:transparent; min-width:0;
+}
+.ucard img{width:22px; height:22px; object-fit:contain; flex:0 0 22px}
+.ucardtxt{flex:1; min-width:0}
+.ucard .n{font-size:8.8px; font-weight:800; line-height:1.2}
+.ucard .by{
+  font-size:6.9px; color:var(--muted); font-weight:600; line-height:1.2;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.ucard .q{
+  width:22px; height:22px; flex:0 0 22px; border-radius:5px; background:#eef1f5; color:#8a93a1;
+  display:grid; place-items:center; font-weight:900; font-size:12px;
+}
+
+/* status badge pinned under the sprite name: hairline outline, no fill, so it costs almost no ink */
+.ubadge{display:flex; justify-content:flex-start; margin-top:1.8px}
+.badge{
+  display:inline-block; font-size:5.9px; font-weight:900; letter-spacing:.11em; text-transform:uppercase;
+  background:#fff; border:1px solid currentColor; border-radius:3px; padding:1.2px 4.5px 1px;
+  white-space:nowrap; flex:0 0 auto;
+}
+.badge.new{color:#6d28d9}
+.badge.das{color:#0f7a44}

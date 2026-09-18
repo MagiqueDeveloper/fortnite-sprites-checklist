@@ -1,0 +1,47 @@
+/* Released families: stacked blocks in four columns, rarity order left to right. */
+
+.grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:2.6mm 3.6mm; flex:1 0 auto;
+  align-content:start; align-items:start;
+}
+.fam{break-inside:avoid}
+
+.famhead{display:flex; align-items:center; gap:6px; margin-bottom:1.4mm}
+.famhead h2{
+  font-size:9.8px; font-weight:900; text-transform:uppercase; letter-spacing:.02em;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.famhead .rule{
+  flex:1; height:1px; min-width:8px; border-radius:1px;
+  background:linear-gradient(90deg, var(--rar), var(--line));
+}
+.famhead .rar{font-size:6.6px; font-weight:900; letter-spacing:.14em; color:var(--rar); flex:0 0 auto}
+
+.cards{display:flex; flex-direction:column; gap:1.25mm}
+.card{
+  display:flex; align-items:center; gap:5px; border:1px solid var(--line); border-radius:6px;
+  padding:2.5px 5px 2.5px 4px; background:#fff; min-width:0;
+}
+.icon{width:24px; height:24px; flex:0 0 24px; display:grid; place-items:center; overflow:hidden}
+.icon img{width:23px; height:23px; object-fit:contain; display:block}
+.meta{flex:1; min-width:0}
+
+/* name size is set by src/components/Name.tsx, which shrinks long names to one line */
+.name{
+  font-size:9.2px; font-weight:800; line-height:1.14;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+.checks{display:flex; gap:8px; margin-top:1.4px}
+.chk{
+  display:inline-flex; align-items:center; gap:3.5px; font-size:7.2px; font-weight:700; color:#3a3f4a;
+  cursor:pointer; user-select:none; border-radius:3px; white-space:nowrap;
+}
+.chk i{
+  width:9px; height:9px; border:1.3px solid #4a5060; border-radius:2.5px; display:grid; place-items:center;
+  background:#fff; font-style:normal; flex:0 0 9px;
+}
+.chk.on i{background:var(--ink); border-color:var(--ink)}
+.chk.on i::after{content:"✓"; color:#fff; font-size:7.5px; font-weight:900; line-height:1}
+.chk.on{color:var(--ink)}
+.chk:focus-visible{outline:2px solid var(--rare); outline-offset:1px}
