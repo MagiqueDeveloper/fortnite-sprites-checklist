@@ -1,13 +1,15 @@
 /* Offline cache for the Sprites checklist.
  *
- * Install precaches the app shell. Everything else the page needs (the hashed
- * JS and CSS, the 75 sprite images, the web app manifest) is stored as it is
- * fetched, so the first visit leaves a complete copy on disk.
+ * Install precaches the app shell and skips waiting. The page also writes into
+ * this same cache (see src/lib/offlineCache.ts, which owns the cache name), so
+ * a first visit stores the bundle, the manifest, the icons and all 75 sprite
+ * PNGs even before the worker controls anything.
  *
  * Navigations are network-first, so a redeploy is picked up when online, and
- * fall back to the cached shell when there is no connection. Static assets are
- * cache-first, and their filenames are content-hashed, so a new build simply
- * arrives as new URLs. Bump CACHE_VERSION to retire old caches.
+ * fall back to the cached shell when there is no connection. Everything else is
+ * cache-first; the bundles and sprite filenames are content-hashed, so a new
+ * build simply arrives as new URLs. Bump CACHE_VERSION (in both this file and
+ * offlineCache.ts) to retire old caches.
  */
 const CACHE_VERSION = 'v1';
 const CACHE_NAME = `ch7s4-sprites-${CACHE_VERSION}`;
@@ -15,10 +17,12 @@ const SHELL = ['./', './index.html', './manifest.webmanifest'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches
-      .open(CACHE_NAME)
-      .then((cache) => cache.addAll(SHELL))
-      .then(() => self.skipWaiting()),
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      // one unreachable URL must not abandon the whole install
+      await Promise.allSettled(SHELL.map((url) => cache.add(url)));
+      await self.skipWaiting();
+    })(),
   );
 });
 
@@ -44,13 +48,12 @@ self.addEventListener('fetch', (event) => {
   if (request.mode === 'navigate') {
     event.respondWith(
       (async () => {
+        const cache = await caches.open(CACHE_NAME);
         try {
           const response = await fetch(request);
-          const cache = await caches.open(CACHE_NAME);
-          void cache.put('./index.html', response.clone());
+          if (response.ok) void cache.put('./index.html', response.clone());
           return response;
         } catch {
-          const cache = await caches.open(CACHE_NAME);
           return (
             (await cache.match('./index.html')) ??
             (await cache.match('./')) ??
@@ -72,7 +75,7 @@ self.addEventListener('fetch', (event) => {
       if (cached) return cached;
 
       const response = await fetch(request);
-      if (response && response.ok && response.type === 'basic') {
+      if (response.ok && response.type === 'basic') {
         void cache.put(request, response.clone());
       }
       return response;
