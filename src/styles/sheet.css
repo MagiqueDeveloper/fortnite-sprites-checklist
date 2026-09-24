@@ -1,8 +1,9 @@
 /* The A4 page itself: masthead, counters and footer. */
 
 .sheet{
-  width:210mm; min-height:282mm; margin:0 auto; background:#fff; padding:8mm;
-  box-shadow:0 10px 40px rgba(20,24,40,.18); border-radius:2px; display:flex; flex-direction:column;
+  width:var(--page-width); height:var(--page-height); margin:0 auto; background:#fff;
+  padding:var(--page-pad); box-shadow:0 10px 40px rgba(20,24,40,.18); border-radius:2px;
+  display:flex; flex-direction:column; overflow:hidden;
 }
 
 .head{

@@ -8,13 +8,17 @@
  * always a true A4 page no matter how wide the window happens to be.
  */
 const PRINT_STYLES = `
-  html, body { margin: 0 !important; padding: 0 !important; background: #fff !important; }
-  .sheet { zoom: 1 !important; margin: 0 !important; }
+  @page { size: A4 portrait; margin: 0; }
+  html, body {
+    margin: 0 !important; padding: 0 !important; background: #fff !important;
+    width: var(--page-width); height: var(--page-height); overflow: hidden;
+  }
+  .sheet { zoom: 1 !important; margin: 0 !important; box-shadow: none !important; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 `;
 
 const FRAME_STYLE =
-  'position:fixed; left:-10000px; top:0; width:210mm; min-height:297mm; border:0; margin:0;';
+  'position:fixed; left:-10000px; top:0; width:210mm; height:297mm; border:0; margin:0;';
 
 export function printSheet(sheet: HTMLElement): Promise<void> {
   const clone = sheet.cloneNode(true) as HTMLElement;

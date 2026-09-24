@@ -4,6 +4,9 @@
   --ink:#171a21; --muted:#6b7280; --line:#e2e5ea; --soft:#f4f5f7;
   --rare:#2f7fe4; --epic:#9b4dff; --leg:#ff9d2e; --myth:#ff4d6d; --ghost:#5b6472;
   --cheat:#1f9d3a; --gold:#b8860b; --lh:#d92e50;
+  /* One page box for the preview and the print. 8mm of padding keeps the ink
+     inside the band a printer can actually mark. */
+  --page-width:210mm; --page-height:297mm; --page-pad:8mm;
 }
 
 *{box-sizing:border-box; margin:0; padding:0}

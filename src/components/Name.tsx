@@ -30,7 +30,7 @@ export function Name({ text, variantClass }: { text: string; variantClass?: stri
     const fonts = (document as Document & { fonts?: FontFaceSet }).fonts;
     void fonts?.ready.then(fit);
     return () => window.removeEventListener('resize', fit);
-  });
+  }, [text]);
 
   return (
     <div ref={ref} className={variantClass ? `name ${variantClass}` : 'name'} title={text}>

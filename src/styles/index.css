@@ -1,4 +1,4 @@
-/* Ordered stylesheet entry point: order matters, print rules come last. */
+/* Ordered stylesheet entry point. Print rules come last. */
 @import './base.css';
 @import './toolbar.css';
 @import './sheet.css';
