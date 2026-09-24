@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, type ReactNode } from 'react';
 
-const NAME_BASE_PX = 9.2; // size used when the name already fits on one line
-const NAME_MIN_PX = 5.8; // floor, so very long names stay readable
+const NAME_BASE_PX = 8.2; // size used when the name already fits on one line
+const NAME_MIN_PX = 5.2; // floor, so very long names stay readable
 
 /**
  * Sprite name that always occupies a single line. It starts at the base size and

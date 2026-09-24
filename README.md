@@ -6,13 +6,13 @@ A printable A4 checklist for every Sprite variant in Fortnite Chapter 7 Season 4
 
 ## Features
 
-- **73 collectible Sprites** across 19 families, ordered by rarity left to right (Rare, Epic, Legendary, Mythic)
-- **Four variants per family** where they exist: base, Cheat Master, Gold and Loot Hacker
+- **91 collectible Sprites** across 19 families, ordered by rarity left to right (Rare, Epic, Legendary, Mythic)
+- **Five variants per family** where they exist: base, Cheat Master, Gold, Loot Hacker and Bounty Hunter. Mega Man ships base only
 - **Found / Mastered tick boxes** per variant, saved in `localStorage` and printed exactly as shown on screen
 - **Print A4 button** that prints the previewed sheet container and nothing else, always as a single A4 page
 - **Misc section** under the black rule for released Sprites that ship without variants
 - **Unreleased section** for announced Sprites, badged with their status
-- **Fully offline:** all 75 sprite images ship in `public/sprites/`, so the page makes no external requests
+- **Fully offline:** all 93 sprite images ship in `public/sprites/`, so the page makes no external requests
 - **Offline ready after the first visit:** a service worker precaches the shell and every sprite, so later visits work with no connection at all
 - **Installable:** a web app manifest with icons, so it can be added to a phone home screen or desktop as its own window
 - **Self-fitting names:** long variants such as "Loot Hacker Crash Bandicoot" shrink to stay on one line
@@ -45,7 +45,7 @@ Browsers refuse to load ES modules from `file://` URLs, so serve `dist/` with an
 `public/sw.js` registers a service worker (production builds only, via `src/lib/registerServiceWorker.ts`):
 
 - **Install** precaches the app shell: `./`, `index.html` and the manifest.
-- **Static assets** (the hashed JS and CSS, the sprite PNGs, the icons) are served cache-first and stored the first time they are fetched. Because the page renders every Sprite, one normal visit ends up with all 75 images cached.
+- **Static assets** (the hashed JS and CSS, the sprite PNGs, the icons) are served cache-first and stored the first time they are fetched. Because the page renders every Sprite, one normal visit ends up with all 93 images cached.
 - **Navigations** are network-first, so a redeploy is picked up while online, and fall back to the cached shell when there is no connection.
 - Old caches are deleted on activate; bump `CACHE_VERSION` in `sw.js` to retire them after a breaking change.
 
@@ -94,7 +94,7 @@ src/
     grid.css                   Families, cards, names and tick boxes
     sections.css               Misc and Unreleased sections, badges
     print.css                  @page and @media print rules
-public/sprites/                75 sprite images, sorted by family
+public/sprites/                93 sprite images, sorted by family
 public/sw.js                   Offline service worker: precaches the shell, cache-first assets
 public/manifest.webmanifest    Installable app manifest
 public/icon-192.png            App icons (192, 512 and a maskable 512)
@@ -107,8 +107,8 @@ Images are grouped one folder per family, named after the family `id` in `src/da
 
 ```
 public/sprites/
-├── 8bit/             base.png  cheat-master.png  gold.png  loot-hacker.png
-├── adventure/        base.png  cheat-master.png  gold.png  loot-hacker.png
+├── 8bit/             base.png  cheat-master.png  gold.png  loot-hacker.png  bounty-hunter.png
+├── adventure/        base.png  cheat-master.png  gold.png  loot-hacker.png  bounty-hunter.png
 ├── blinky/           ...
 ├── bush/
 ├── crash_bandicoot/
@@ -134,6 +134,8 @@ To add or replace art, drop a PNG in the matching folder (transparent background
 ## Rarity sources
 
 Rarities come from the Fortnite Wiki infoboxes, cross-checked against IGN's checklist, and abilities are taken from Epic's own patch notes. Only Sprites with a published rarity and available art are listed as released; anything unconfirmed stays in the Unreleased section rather than being guessed at.
+
+Bounty Hunter art and names come from IGN's checklist, and the tier is tracked for every released family. Birthday and Morgana also have Bounty Hunter forms, which stay in the Unreleased section with them until those Sprites ship.
 
 ## Hosting
 

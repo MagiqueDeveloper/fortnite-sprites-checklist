@@ -7,19 +7,19 @@
 
 .head{
   display:flex; justify-content:space-between; align-items:flex-start; gap:8mm;
-  border-bottom:2px solid var(--ink); padding-bottom:3mm; margin-bottom:3.4mm;
+  border-bottom:2px solid var(--ink); padding-bottom:2.4mm; margin-bottom:2.6mm;
 }
 .logo{
-  font-size:34px; font-weight:900; font-style:italic; letter-spacing:.5px; color:var(--ink);
+  font-size:29px; font-weight:900; font-style:italic; letter-spacing:.5px; color:var(--ink);
   text-shadow:2px 0 0 #38e1ff, -2px 0 0 #ff5bd6, 1.5px 1.5px 0 #ffd34d; line-height:1;
 }
 .stats{text-align:right}
-.bigcount{font-size:21px; font-weight:900; line-height:1}
-.bigcount em{font-style:normal; font-weight:800; text-transform:uppercase; letter-spacing:.06em; font-size:13px}
-.sub{font-size:9px; color:var(--muted); font-weight:600; margin-top:3px}
+.bigcount{font-size:18px; font-weight:900; line-height:1}
+.bigcount em{font-style:normal; font-weight:800; text-transform:uppercase; letter-spacing:.06em; font-size:11.5px}
+.sub{font-size:8.2px; color:var(--muted); font-weight:600; margin-top:2px}
 
 .foot{
-  margin-top:3mm; border-top:1px solid var(--line); padding-top:1.8mm; display:flex;
-  justify-content:space-between; gap:6mm; font-size:7px; color:var(--muted); line-height:1.45;
+  margin-top:2.2mm; border-top:1px solid var(--line); padding-top:1.5mm; display:flex;
+  justify-content:space-between; gap:6mm; font-size:6.6px; color:var(--muted); line-height:1.4;
 }
 .foot .r{text-align:right; font-weight:700; white-space:nowrap}
