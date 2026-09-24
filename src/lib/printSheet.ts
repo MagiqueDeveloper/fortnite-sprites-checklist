@@ -42,7 +42,7 @@ export function printSheet(sheet: HTMLElement): Promise<void> {
   doc.write(
     `<!doctype html><html lang="en"><head><meta charset="utf-8">` +
       `<base href="${document.baseURI}">` +
-      `<title>Fortnite CH7S4: Sprites Checklist</title>` +
+      `<title>Fortnite CH7S4 Sprites Checklist</title>` +
       styles +
       `<style>${PRINT_STYLES}</style>` +
       `</head><body>${clone.outerHTML}</body></html>`,
