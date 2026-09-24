@@ -1,7 +1,7 @@
 /* Released families: stacked blocks in four columns, rarity order left to right. */
 
 .grid{
-  display:grid; grid-template-columns:repeat(4,1fr); gap:2.2mm 3.6mm; flex:1 0 auto;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1.9mm 3.6mm; flex:1 0 auto;
   align-content:start; align-items:start;
 }
 .fam{break-inside:avoid}
@@ -17,13 +17,13 @@
 }
 .famhead .rar{font-size:6px; font-weight:900; letter-spacing:.14em; color:var(--rar); flex:0 0 auto}
 
-.cards{display:flex; flex-direction:column; gap:0.9mm}
+.cards{display:flex; flex-direction:column; gap:0.6mm}
 .card{
   display:flex; align-items:center; gap:5px; border:1px solid var(--line); border-radius:6px;
   padding:2px 4.5px 2px 3.5px; background:#fff; min-width:0;
 }
-.icon{width:20px; height:20px; flex:0 0 20px; display:grid; place-items:center; overflow:hidden}
-.icon img{width:19.5px; height:19.5px; object-fit:contain; display:block}
+.icon{width:19px; height:19px; flex:0 0 19px; display:grid; place-items:center; overflow:hidden}
+.icon img{width:18.5px; height:18.5px; object-fit:contain; display:block}
 .meta{flex:1; min-width:0}
 
 /* name size is set by src/components/Name.tsx, which shrinks long names to one line */
