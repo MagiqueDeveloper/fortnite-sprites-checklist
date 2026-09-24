@@ -55,7 +55,7 @@ The result: visit once online, then the checklist opens and prints with the netw
 
 ## Printing
 
-`Print A4` clones the `.sheet` element into a temporary off-screen document, waits for every sprite image, and prints that document on its own. The on-screen scale-to-fit zoom is dropped for the clone, so the output is a true 210mm page whatever the window width. Print styling isolates the sheet and hides the toolbar, and the sheet keeps a full page height so the grid stretches and the tail sections sit at the bottom of the page.
+`Print A4` clones the `.sheet` element into a temporary off-screen document, waits for every sprite image, and prints that document on its own. The on-screen scale-to-fit zoom is dropped for the clone, so the output is a true 210mm page whatever the window width. Print styling isolates the sheet and hides the toolbar. The sheet's 8mm padding becomes the `@page` margin, so the browser keeps everything inside the area a printer can ink rather than painting a full-bleed box the driver has to crop. The family rows share any spare height, so the footer lands at the foot of the page on screen and on paper.
 
 ## Project structure
 

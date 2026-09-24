@@ -1,8 +1,10 @@
-/* Released families: stacked blocks in four columns, rarity order left to right. */
+/* Released families: stacked blocks in four columns, rarity order left to right.
+   Spare page height goes between the family rows, so the tail sections follow the
+   grid directly and the footer lands at the foot of the page. */
 
 .grid{
-  display:grid; grid-template-columns:repeat(4,1fr); gap:1.9mm 3.6mm; flex:0 0 auto;
-  align-content:start; align-items:start;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1.9mm 3.6mm; flex:1 1 auto;
+  align-content:space-between; align-items:start;
 }
 .fam{break-inside:avoid}
 
