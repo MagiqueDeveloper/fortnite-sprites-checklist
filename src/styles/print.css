@@ -7,12 +7,12 @@
 @media print{
   html,body{background:#fff; margin:0; padding:0}
   .toolbar{display:none !important}
-  /* plain block flow at natural height: no forced heights or flex, so engines that
-     fragment flex/grid boxes differently (WebKit) cannot push content to page 2 */
+  /* One page tall, 10mm short of the printable 281mm as slack for engine differences.
+     The grid's bottom auto margin absorbs the spare height, so Misc, Unreleased and the
+     credit line sit at the foot of the page exactly as they do in the preview. */
   .sheet{
-    display:block; width:auto; height:auto; min-height:0; margin:0; padding:0; zoom:1;
+    width:auto; height:271mm; min-height:0; margin:0; padding:0; zoom:1;
     box-shadow:none; border-radius:0; overflow:visible;
   }
-  .grid{align-content:start}
   *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
 }

@@ -3,8 +3,8 @@
    grid directly and the footer lands at the foot of the page. */
 
 .grid{
-  display:grid; grid-template-columns:repeat(4,1fr); gap:1.4mm 3.6mm; flex:1 1 auto;
-  align-content:space-between; align-items:start;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1.4mm 3.6mm; flex:0 0 auto;
+  align-items:start; margin-bottom:auto; /* free height goes below the grid, so Misc, Unreleased and the footer sit at the foot */
 }
 .fam{break-inside:avoid}
 
