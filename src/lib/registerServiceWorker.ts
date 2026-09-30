@@ -1,12 +1,6 @@
-import { cachePageAssets } from './offlineCache';
-
 /**
- * Registers the offline service worker and fills its cache.
- *
- * The worker handles later visits; the page does the caching here, because a
- * worker only sees requests made while it is in control and the sheet asks for
- * its images as it first paints. Both run on load, so a first visit leaves a
- * complete copy behind.
+ * Registers the offline service worker. The worker precaches the whole site when
+ * it installs (see public/sw.js), so one online visit is enough.
  *
  * Production only: the Vite dev server serves unbundled modules that should not
  * be cached.
@@ -14,24 +8,13 @@ import { cachePageAssets } from './offlineCache';
 export function registerServiceWorker(): void {
   if (!import.meta.env.PROD || !('serviceWorker' in navigator)) return;
 
-  window.addEventListener('load', () => {
-    void cachePageAssets().catch((error: unknown) => {
-      console.warn('Offline cache could not be filled:', error);
+  const register = (): void => {
+    navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch((error: unknown) => {
+      console.warn('Offline worker unavailable:', error);
     });
+  };
 
-    void navigator.serviceWorker
-      .register(`${import.meta.env.BASE_URL}sw.js`)
-      .then(async () => {
-        await navigator.serviceWorker.ready;
-        // the fresh worker may only control this page after it claims clients
-        navigator.serviceWorker.addEventListener(
-          'controllerchange',
-          () => void cachePageAssets(),
-          { once: true },
-        );
-      })
-      .catch((error: unknown) => {
-        console.warn('Offline worker unavailable:', error);
-      });
-  });
+  // register after load so the worker never competes with the first paint
+  if (document.readyState === 'complete') register();
+  else window.addEventListener('load', register, { once: true });
 }
