@@ -1,4 +1,6 @@
-/* The A4 page itself: masthead, counters and footer. */
+/* The A4 pages themselves: masthead, counters and footer. */
+
+.sheets{display:flex; flex-direction:column; gap:14px}
 
 .sheet{
   width:var(--page-width); min-height:var(--page-height); margin:0 auto; background:#fff;
@@ -6,21 +8,30 @@
   display:flex; flex-direction:column;
 }
 
+/* --fit (src/hooks/useSheetFit.ts) is 1 unless a page's content would overflow one A4
+   sheet. Every length below is written as a multiple of --px or --mm, which shrink
+   together with it, so the layout stays real (no zoom or transform) in every engine. */
+.sheet{--px:calc(1px * var(--fit, 1)); --mm:calc(1mm * var(--fit, 1))}
+
 .head{
-  display:flex; justify-content:space-between; align-items:flex-start; gap:8mm;
-  border-bottom:2px solid var(--ink); padding-bottom:2.4mm; margin-bottom:2.6mm;
+  display:flex; justify-content:space-between; align-items:flex-start; gap:calc(8 * var(--mm));
+  border-bottom:calc(2 * var(--px)) solid var(--ink); padding-bottom:calc(2.4 * var(--mm)); margin-bottom:calc(2.6 * var(--mm));
 }
 .logo{
-  font-size:29px; font-weight:900; font-style:italic; letter-spacing:.5px; color:var(--ink);
-  text-shadow:2px 0 0 #38e1ff, -2px 0 0 #ff5bd6, 1.5px 1.5px 0 #ffd34d; line-height:1;
+  font-size:calc(29 * var(--px)); font-weight:900; font-style:italic; letter-spacing:calc(.5 * var(--px)); color:var(--ink);
+  text-shadow:calc(2 * var(--px)) 0 0 #38e1ff, calc(-2 * var(--px)) 0 0 #ff5bd6, calc(1.5 * var(--px)) calc(1.5 * var(--px)) 0 #ffd34d; line-height:1;
 }
+/* slim strip that opens the second and later pages */
+.head.cont{align-items:center}
+.head.cont .logo{font-size:calc(18 * var(--px))}
+.head.cont .sub{margin-top:0; font-size:calc(8.6 * var(--px))}
 .stats{text-align:right}
-.bigcount{font-size:18px; font-weight:900; line-height:1}
-.bigcount em{font-style:normal; font-weight:800; text-transform:uppercase; letter-spacing:.06em; font-size:11.5px}
-.sub{font-size:8.2px; color:var(--muted); font-weight:600; margin-top:2px}
+.bigcount{font-size:calc(18 * var(--px)); font-weight:900; line-height:1}
+.bigcount em{font-style:normal; font-weight:800; text-transform:uppercase; letter-spacing:.06em; font-size:calc(11.5 * var(--px))}
+.sub{font-size:calc(8.2 * var(--px)); color:var(--muted); font-weight:600; margin-top:calc(2 * var(--px))}
 
 .foot{
-  margin-top:2.2mm; border-top:1px solid var(--line); padding-top:1.5mm; display:flex;
-  justify-content:space-between; gap:6mm; font-size:6.6px; color:var(--muted); line-height:1.4;
+  margin-top:calc(2.2 * var(--mm)); border-top:calc(1 * var(--px)) solid var(--line); padding-top:calc(1.5 * var(--mm)); display:flex;
+  justify-content:space-between; gap:calc(6 * var(--mm)); font-size:calc(6.6 * var(--px)); color:var(--muted); line-height:1.4;
 }
 .foot .r{text-align:right; font-weight:700; white-space:nowrap}

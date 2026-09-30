@@ -9,7 +9,7 @@ A printable A4 checklist for every Sprite variant in Fortnite Chapter 7 Season 4
 - **101 collectible Sprites** across 21 families, ordered by rarity left to right (Rare, Epic, Legendary, Mythic)
 - **Five variants per family** where they exist: base, Cheat Master, Gold, Loot Hacker and Bounty Hunter. Mega Man ships base only
 - **Found / Mastered tick boxes** per variant, saved in `localStorage` and printed exactly as shown on screen
-- **Print A4 button** that runs the browser's normal print on the same page you see, always as a single A4 page (Ctrl+P gives the identical result)
+- **Print A4 button** that runs the browser's normal print on the same page you see, as one A4 page for as long as the roster fits, then as extra pages (Ctrl+P gives the identical result)
 - **Misc section** under the black rule for released Sprites that ship without variants
 - **Unreleased section** for announced Sprites, badged with their status
 - **Fully offline:** all 101 sprite images ship in `public/sprites/`, so the page makes no external requests
@@ -58,6 +58,15 @@ The result: visit once online, then the checklist opens and prints with the netw
 
 `Print A4` calls `window.print()`, so it is exactly what Ctrl+P does. `print.css` sets `@page` to A4 with an 8mm margin, hides the toolbar and ignores the phone layout (which is screen-only), so the output is a true A4 page whatever the window width. The sheet's 8mm screen padding matches that margin, so the preview and the paper share the same content box. The sheet is a flex column, so the Misc section, the Unreleased section and the credit line are always pinned to the foot of the page: any spare height becomes a gap under the family grid (`margin-bottom:auto` on `.grid`). In print the sheet is a fixed 268mm tall, 13mm short of the 281mm printable area. That slack matters: WebKit (Safari, Orion) lays the page out a little taller than Chrome, and a sheet sized to the full page pushed the footer onto a second page there. If you add content, check that it still prints on one page in Chrome and Safari.
 
+### When the roster grows
+
+A row of four families is about 42mm tall, so a page holds 5 rows (20 families) at natural size. Past that the sheet adapts by itself:
+
+- **21 to 24 families** stay on one page. `src/hooks/useSheetFit.ts` measures the content in a hidden desktop-width frame and sets a `--fit` scale (about 0.86 for a sixth row). Every length in `grid.css`, `sections.css` and `sheet.css` is written as a multiple of `--px` or `--mm`, which shrink with `--fit`. This is real layout rather than `zoom` or `transform`, because `zoom` printed stray blank pages in Chrome. Phones ignore the scale.
+- **More than 24 families** continue onto further A4 pages (`src/lib/pages.ts`, 24 per page). Later pages get a slim header, and Misc, Unreleased and the footer close the last page.
+
+The two limits in `pages.ts` are the numbers to tune. Check a roster change in both Chrome and Safari/Orion: pad `FAMILIES` with copies, print, and confirm the page count.
+
 ## Project structure
 
 ```
@@ -68,7 +77,7 @@ src/
   types.ts                     Shared types (ToggleTick)
   data/sprites.ts              Typed roster: families, variants, rarities, abilities, image paths
   components/
-    Sheet.tsx                  The A4 page: header, grid, Misc, Unreleased, footer
+    Sheet.tsx                  The A4 pages: header, grid, Misc, Unreleased, footer
     SheetHeader.tsx            OVERRIDE wordmark and the collectible counters
     SheetFooter.tsx            Artwork credit and season marker
     Toolbar.tsx                Print A4 / Reset controls
@@ -82,8 +91,10 @@ src/
     Name.tsx                   Auto-shrinking single-line sprite name
   hooks/
     useTicks.ts                Tick state, localStorage persistence, Mastered implies Found
+    useSheetFit.ts             Measures each page and sets its --fit scale so it fits one A4 sheet
   lib/
     asset.ts                   Resolve data paths against the deploy base URL
+    pages.ts                   How many families fit per A4 page
     registerServiceWorker.ts   Register the offline worker in production builds
   styles/
     index.css                  Ordered entry point for the stylesheets below

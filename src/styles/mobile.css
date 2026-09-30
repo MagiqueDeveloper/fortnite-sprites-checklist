@@ -13,6 +13,9 @@
     display:block;
   }
 
+  .sheets{gap:18px}
+  .sheet{--px:1px; --mm:1mm} /* phones ignore the A4 fit */
+
   .head{flex-wrap:wrap; gap:6px 12px; padding-bottom:12px; margin-bottom:14px}
   .logo{font-size:30px}
   .stats{text-align:left}

@@ -14,5 +14,7 @@
     width:auto; height:268mm; min-height:0; margin:0; padding:0;
     box-shadow:none; border-radius:0; overflow:visible;
   }
+  .sheets{display:block}
+  .sheet + .sheet{break-before:page}
   *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
 }

@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef, type ReactNode } from 'react';
+import { SHEET_FIT_EVENT } from '../hooks/useSheetFit';
 
 const MIN_SCALE = 0.6; // floor, as a share of the CSS size, so very long names stay readable
 
@@ -27,6 +28,7 @@ export function Name({ text, variantClass }: { text: string; variantClass?: stri
 
     fit();
     window.addEventListener('resize', fit);
+    window.addEventListener(SHEET_FIT_EVENT, fit); // the sheet's scale changed the base size
     // refit for the print layout, which can differ from the screen one (phones, narrow windows)
     const printQuery = window.matchMedia('print');
     printQuery.addEventListener('change', fit);
@@ -34,6 +36,7 @@ export function Name({ text, variantClass }: { text: string; variantClass?: stri
     void fonts?.ready.then(fit);
     return () => {
       window.removeEventListener('resize', fit);
+      window.removeEventListener(SHEET_FIT_EVENT, fit);
       printQuery.removeEventListener('change', fit);
     };
   }, [text]);

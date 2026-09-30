@@ -1,38 +1,38 @@
 /* The two tail sections: released single-variant Sprites, then unreleased ones. */
 
 /* misc: released Sprites that ship without variants, introduced by the black rule */
-.misc{break-inside:avoid; margin-top:2.6mm; border-top:2px solid var(--ink); padding-top:1.8mm}
+.misc{break-inside:avoid; margin-top:calc(2.6 * var(--mm)); border-top:calc(2 * var(--px)) solid var(--ink); padding-top:calc(1.8 * var(--mm))}
 .misc .unhead .bar{background:var(--ink)}
-.singlecards{display:grid; grid-template-columns:repeat(4,1fr); gap:1.3mm}
+.singlecards{display:grid; grid-template-columns:repeat(4,1fr); gap:calc(1.3 * var(--mm))}
 /* the family header sits inside the card, in place of a plain title */
-.singlecards .famhead{margin-bottom:0; gap:5px}
-.singlecards .famhead h2{font-size:8.4px}
-.singlecards .famhead .rar{font-size:5.9px}
+.singlecards .famhead{margin-bottom:0; gap:calc(5 * var(--px))}
+.singlecards .famhead h2{font-size:calc(8.4 * var(--px))}
+.singlecards .famhead .rar{font-size:calc(5.9 * var(--px))}
 
-.unreleased{break-inside:avoid; margin-top:2.6mm; border-top:1px solid var(--line); padding-top:1.8mm}
-.unhead{display:flex; align-items:center; gap:4px; margin-bottom:1.5mm}
-.unhead .bar{width:3.2px; height:12px; border-radius:2px; background:var(--ghost)}
-.unhead h2{font-size:9.2px; font-weight:900; text-transform:uppercase; letter-spacing:.05em; flex:1}
-.unhead .rar{font-size:7.5px; font-weight:900; letter-spacing:.08em; color:var(--ghost)}
+.unreleased{break-inside:avoid; margin-top:calc(2.6 * var(--mm)); border-top:calc(1 * var(--px)) solid var(--line); padding-top:calc(1.8 * var(--mm))}
+.unhead{display:flex; align-items:center; gap:calc(4 * var(--px)); margin-bottom:calc(1.5 * var(--mm))}
+.unhead .bar{width:calc(3.2 * var(--px)); height:calc(12 * var(--px)); border-radius:calc(2 * var(--px)); background:var(--ghost)}
+.unhead h2{font-size:calc(9.2 * var(--px)); font-weight:900; text-transform:uppercase; letter-spacing:.05em; flex:1}
+.unhead .rar{font-size:calc(7.5 * var(--px)); font-weight:900; letter-spacing:.08em; color:var(--ghost)}
 
-.wincards{display:grid; grid-template-columns:repeat(4,1fr); gap:3px}
+.wincards{display:grid; grid-template-columns:repeat(4,1fr); gap:calc(3 * var(--px))}
 .ucard{
-  border:1px dashed #c6ccd6; border-radius:6px; padding:4px 6px; display:flex; gap:6px;
+  border:calc(1 * var(--px)) dashed #c6ccd6; border-radius:calc(6 * var(--px)); padding:calc(4 * var(--px)) calc(6 * var(--px)); display:flex; gap:calc(6 * var(--px));
   align-items:center; background:transparent; min-width:0;
 }
-.ucard img{width:20px; height:20px; object-fit:contain; flex:0 0 20px}
+.ucard img{width:calc(20 * var(--px)); height:calc(20 * var(--px)); object-fit:contain; flex:0 0 calc(20 * var(--px))}
 .ucardtxt{flex:1; min-width:0}
-.ucard .n{font-size:8.2px; font-weight:800; line-height:1.2}
+.ucard .n{font-size:calc(8.2 * var(--px)); font-weight:800; line-height:1.2}
 .ucard .q{
-  width:20px; height:20px; flex:0 0 20px; border-radius:5px; background:#eef1f5; color:#8a93a1;
-  display:grid; place-items:center; font-weight:900; font-size:12px;
+  width:calc(20 * var(--px)); height:calc(20 * var(--px)); flex:0 0 calc(20 * var(--px)); border-radius:calc(5 * var(--px)); background:#eef1f5; color:#8a93a1;
+  display:grid; place-items:center; font-weight:900; font-size:calc(12 * var(--px));
 }
 
 /* status badge pinned under the sprite name: hairline outline, no fill, so it costs almost no ink */
-.ubadge{display:flex; justify-content:flex-start; margin-top:1.8px}
+.ubadge{display:flex; justify-content:flex-start; margin-top:calc(1.8 * var(--px))}
 .badge{
-  display:inline-block; font-size:5.9px; font-weight:900; letter-spacing:.11em; text-transform:uppercase;
-  background:#fff; border:1px solid currentColor; border-radius:3px; padding:1.2px 4.5px 1px;
+  display:inline-block; font-size:calc(5.9 * var(--px)); font-weight:900; letter-spacing:.11em; text-transform:uppercase;
+  background:#fff; border:calc(1 * var(--px)) solid currentColor; border-radius:calc(3 * var(--px)); padding:calc(1.2 * var(--px)) calc(4.5 * var(--px)) calc(1 * var(--px));
   white-space:nowrap; flex:0 0 auto;
 }
 .badge.new{color:#6d28d9}
