@@ -7,9 +7,12 @@
 @media print{
   html,body{background:#fff; margin:0; padding:0}
   .toolbar{display:none !important}
+  /* plain block flow at natural height: no forced heights or flex, so engines that
+     fragment flex/grid boxes differently (WebKit) cannot push content to page 2 */
   .sheet{
-    width:auto; height:auto; min-height:279mm; /* 281mm printable, 2mm spare */ margin:0; padding:0; zoom:1;
-    box-shadow:none; border-radius:0; overflow:visible; break-inside:avoid;
+    display:block; width:auto; height:auto; min-height:0; margin:0; padding:0; zoom:1;
+    box-shadow:none; border-radius:0; overflow:visible;
   }
+  .grid{align-content:start}
   *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
 }

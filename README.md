@@ -55,7 +55,7 @@ The result: visit once online, then the checklist opens and prints with the netw
 
 ## Printing
 
-`Print A4` calls `window.print()`, so it is exactly what Ctrl+P does. `print.css` sets `@page` to A4 with an 8mm margin, hides the toolbar, and drops the on-screen scale-to-fit zoom, so the output is a true 210mm page whatever the window width. The sheet's 8mm screen padding matches that margin, so the preview and the paper share the same content box. Spare page height is shared between the family rows, so the footer lands at the foot of the page. The sheet never clips on screen; it only grows if content is added, which is how you would notice it no longer fits one page.
+`Print A4` calls `window.print()`, so it is exactly what Ctrl+P does. `print.css` sets `@page` to A4 with an 8mm margin, hides the toolbar, and drops the on-screen scale-to-fit zoom, so the output is a true 210mm page whatever the window width. The sheet's 8mm screen padding matches that margin, so the preview and the paper share the same content box. In print the sheet is plain block flow at its natural height, with no forced heights or flex layout, because WebKit (Safari, Orion) fragments those differently from Chrome and pushed the footer onto a second page. The content is sized to leave about 10mm of slack on the page, which covers the difference between engines. If you add content, check that it still prints on one page in Chrome and Safari.
 
 ## Project structure
 
