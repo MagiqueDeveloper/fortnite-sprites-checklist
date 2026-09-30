@@ -9,11 +9,11 @@ A printable A4 checklist for every Sprite variant in Fortnite Chapter 7 Season 4
 - **91 collectible Sprites** across 19 families, ordered by rarity left to right (Rare, Epic, Legendary, Mythic)
 - **Five variants per family** where they exist: base, Cheat Master, Gold, Loot Hacker and Bounty Hunter. Mega Man ships base only
 - **Found / Mastered tick boxes** per variant, saved in `localStorage` and printed exactly as shown on screen
-- **Print A4 button** that prints the previewed sheet container and nothing else, always as a single A4 page
+- **Print A4 button** that runs the browser's normal print on the same page you see, always as a single A4 page (Ctrl+P gives the identical result)
 - **Misc section** under the black rule for released Sprites that ship without variants
 - **Unreleased section** for announced Sprites, badged with their status
 - **Fully offline:** all 93 sprite images ship in `public/sprites/`, so the page makes no external requests
-- **Offline ready after the first visit:** a service worker precaches the shell and every sprite, so later visits work with no connection at all
+- **Offline ready after the first visit:** a service worker precaches the whole site, so later visits work with no connection at all
 - **Installable:** a web app manifest with icons, so it can be added to a phone home screen or desktop as its own window
 - **Self-fitting names:** long variants such as "Loot Hacker Crash Bandicoot" shrink to stay on one line
 
@@ -42,12 +42,12 @@ Browsers refuse to load ES modules from `file://` URLs, so serve `dist/` with an
 
 ### Offline caching and install
 
-`public/sw.js` registers a service worker (production builds only, via `src/lib/registerServiceWorker.ts`):
+`public/sw.js` registers a service worker (production builds only, via `src/lib/registerServiceWorker.ts`). `vite build` stamps it (see `stampServiceWorker` in `vite.config.ts`) with a hash of the built files and the list of files to precache:
 
-- **Install** precaches the app shell: `./`, `index.html` and the manifest.
-- **Static assets** (the hashed JS and CSS, the sprite PNGs, the icons) are served cache-first and stored the first time they are fetched. Because the page renders every Sprite, one normal visit ends up with all 93 images cached.
-- **Navigations** are network-first, so a redeploy is picked up while online, and fall back to the cached shell when there is no connection.
-- Old caches are deleted on activate; bump `CACHE_VERSION` in `sw.js` to retire them after a breaking change.
+- **Install** precaches the whole site (shell, hashed JS and CSS, all 93 sprites, icons) into a cache named after that hash.
+- **Navigations** are network-first, so a redeploy is picked up while online, and fall back to the cached page when there is no connection.
+- **Everything else** is stale-while-revalidate: served from the cache instantly and refreshed in the background, so replaced sprite art shows up on the next visit even though sprite filenames are not content-hashed.
+- **Activate** deletes the caches of older builds, so there is nothing to bump by hand.
 
 The result: visit once online, then the checklist opens and prints with the network switched off. Clearing site data (or unregistering the worker in DevTools → Application) removes the cached copy.
 
@@ -55,7 +55,7 @@ The result: visit once online, then the checklist opens and prints with the netw
 
 ## Printing
 
-`Print A4` clones the `.sheet` element into a temporary off-screen document, waits for every sprite image, and prints that document on its own. The on-screen scale-to-fit zoom is dropped for the clone, so the output is a true 210mm page whatever the window width. Print styling isolates the sheet and hides the toolbar. The sheet's 8mm padding becomes the `@page` margin, so the browser keeps everything inside the area a printer can ink rather than painting a full-bleed box the driver has to crop. The family rows share any spare height, so the footer lands at the foot of the page on screen and on paper.
+`Print A4` calls `window.print()`, so it is exactly what Ctrl+P does. `print.css` sets `@page` to A4 with an 8mm margin, hides the toolbar, and drops the on-screen scale-to-fit zoom, so the output is a true 210mm page whatever the window width. The sheet's 8mm screen padding matches that margin, so the preview and the paper share the same content box. Spare page height is shared between the family rows, so the footer lands at the foot of the page. The sheet never clips on screen; it only grows if content is added, which is how you would notice it no longer fits one page.
 
 ## Project structure
 
@@ -81,9 +81,8 @@ src/
     Name.tsx                   Auto-shrinking single-line sprite name
   hooks/
     useTicks.ts                Tick state, localStorage persistence, Mastered implies Found
-    useFitSheet.ts             A4 scale-to-fit for narrow viewports
+    useFitSheet.ts             A4 scale-to-fit for narrow viewports (publishes --fit)
   lib/
-    printSheet.ts              Clone the sheet into an off-screen document and print it
     asset.ts                   Resolve data paths against the deploy base URL
     registerServiceWorker.ts   Register the offline worker in production builds
   styles/
@@ -95,7 +94,7 @@ src/
     sections.css               Misc and Unreleased sections, badges
     print.css                  @page and @media print rules
 public/sprites/                93 sprite images, sorted by family
-public/sw.js                   Offline service worker: precaches the shell, cache-first assets
+public/sw.js                   Offline service worker (stamped with a build hash and precache list at build time)
 public/manifest.webmanifest    Installable app manifest
 public/icon-192.png            App icons (192, 512 and a maskable 512)
 .github/workflows/deploy.yml   Type-checks, builds and publishes dist/ to GitHub Pages

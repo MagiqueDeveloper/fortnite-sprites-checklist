@@ -4,8 +4,8 @@ import type { ToggleTick } from '../types';
 
 function readStoredTicks(): TickMap {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as TickMap) : {};
+    const parsed: unknown = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? (parsed as TickMap) : {};
   } catch {
     return {};
   }
