@@ -11,7 +11,7 @@
      The grid's bottom auto margin absorbs the spare height, so Misc, Unreleased and the
      credit line sit at the foot of the page exactly as they do in the preview. */
   .sheet{
-    width:auto; height:268mm; min-height:0; margin:0; padding:0; zoom:1;
+    width:auto; height:268mm; min-height:0; margin:0; padding:0;
     box-shadow:none; border-radius:0; overflow:visible;
   }
   *{-webkit-print-color-adjust:exact; print-color-adjust:exact}

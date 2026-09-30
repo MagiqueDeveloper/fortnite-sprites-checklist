@@ -15,6 +15,7 @@ A printable A4 checklist for every Sprite variant in Fortnite Chapter 7 Season 4
 - **Fully offline:** all 101 sprite images ship in `public/sprites/`, so the page makes no external requests
 - **Offline ready after the first visit:** a service worker precaches the whole site, so later visits work with no connection at all
 - **Installable:** a web app manifest with icons, so it can be added to a phone home screen or desktop as its own window
+- **Phone-friendly:** below 820px wide the page switches from the A4 sheet to a single column (two on tablets) of large cards with big tap targets; printing always gives the A4 sheet
 - **Self-fitting names:** long variants such as "Loot Hacker Crash Bandicoot" shrink to stay on one line
 
 Keyboard accessible: each tick box is a focusable `role="checkbox"` that responds to Space and Enter.
@@ -81,7 +82,6 @@ src/
     Name.tsx                   Auto-shrinking single-line sprite name
   hooks/
     useTicks.ts                Tick state, localStorage persistence, Mastered implies Found
-    useFitSheet.ts             A4 scale-to-fit for narrow viewports (publishes --fit)
   lib/
     asset.ts                   Resolve data paths against the deploy base URL
     registerServiceWorker.ts   Register the offline worker in production builds
@@ -92,6 +92,7 @@ src/
     sheet.css                  The A4 page, masthead and footer
     grid.css                   Families, cards, names and tick boxes
     sections.css               Misc and Unreleased sections, badges
+    mobile.css                 Single-column phone and tablet layout (screen only)
     print.css                  @page and @media print rules
 public/sprites/                101 sprite images, sorted by family
 public/sw.js                   Offline service worker (stamped with a build hash and precache list at build time)

@@ -1,0 +1,61 @@
+/* Phone and small-window layout. Below 820px the A4 sheet no longer fits, so the
+   screen switches from a shrunken page to a single column of large cards with
+   comfortable tap targets. Screen only: printing always gets the A4 sheet. */
+
+@media screen and (max-width:819px){
+  body{padding:68px 10px 28px}
+
+  .toolbar{left:10px; right:10px; top:10px; padding:6px; gap:6px; border-radius:12px}
+  .toolbar button{flex:1; font-size:15px; padding:12px 14px; border-radius:9px}
+
+  .sheet{
+    width:auto; max-width:680px; min-height:0; padding:16px 14px 18px; border-radius:14px;
+    display:block;
+  }
+
+  .head{flex-wrap:wrap; gap:6px 12px; padding-bottom:12px; margin-bottom:14px}
+  .logo{font-size:30px}
+  .stats{text-align:left}
+  .bigcount{font-size:20px}
+  .bigcount em{font-size:12px}
+  .sub{font-size:11px; margin-top:3px}
+
+  .grid{grid-template-columns:1fr; gap:18px; margin-bottom:0}
+  .famhead{gap:8px; margin-bottom:6px}
+  .famhead h2{font-size:15px}
+  .famhead .rule{height:2px}
+  .famhead .rar{font-size:10px}
+
+  .cards{gap:6px}
+  .card{gap:12px; padding:8px 12px 8px 10px; border-radius:10px}
+  .icon{width:40px; height:40px; flex:0 0 40px}
+  .icon img{width:38px; height:38px}
+  .name{font-size:15px; height:auto; line-height:1.3}
+  .checks{gap:20px; margin-top:2px}
+  .chk{font-size:13px; gap:8px; padding:9px 2px; border-radius:6px}
+  .chk i{width:22px; height:22px; flex:0 0 22px; border-width:2px; border-radius:6px}
+  .chk.on i::after{font-size:16px}
+
+  .misc,.unreleased{margin-top:20px; padding-top:14px}
+  .unhead{gap:8px; margin-bottom:10px}
+  .unhead .bar{height:18px}
+  .unhead h2{font-size:14px}
+  .unhead .rar{font-size:10px}
+  .singlecards,.wincards{grid-template-columns:1fr; gap:8px}
+  .singlecards .famhead h2{font-size:15px}
+  .singlecards .famhead .rar{font-size:10px}
+  .ucard{padding:10px 12px; gap:12px; border-radius:10px}
+  .ucard img,.ucard .q{width:36px; height:36px; flex:0 0 36px}
+  .ucard .n{font-size:15px}
+  .badge{font-size:10px; padding:3px 8px 2px}
+  .ubadge{margin-top:4px}
+
+  .foot{flex-direction:column; gap:4px; margin-top:16px; padding-top:10px; font-size:11px}
+  .foot .r{text-align:left; white-space:normal}
+}
+
+/* tablets and large phones in landscape: two columns */
+@media screen and (min-width:560px) and (max-width:819px){
+  .grid{grid-template-columns:repeat(2,1fr); gap:20px 16px}
+  .singlecards,.wincards{grid-template-columns:repeat(2,1fr)}
+}

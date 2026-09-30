@@ -1,7 +1,8 @@
-/* Ordered stylesheet entry point. Print rules come last. */
+/* Ordered stylesheet entry point. Mobile, then print rules come last. */
 @import './base.css';
 @import './toolbar.css';
 @import './sheet.css';
 @import './grid.css';
 @import './sections.css';
+@import './mobile.css';
 @import './print.css';

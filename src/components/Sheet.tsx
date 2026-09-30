@@ -1,4 +1,4 @@
-import type { ReactNode, RefObject } from 'react';
+import type { ReactNode } from 'react';
 import type { TickMap } from '../data/sprites';
 import type { ToggleTick } from '../types';
 import { FamilyGrid } from './FamilyGrid';
@@ -8,7 +8,6 @@ import { SheetHeader } from './SheetHeader';
 import { UnreleasedSection } from './UnreleasedSection';
 
 interface SheetProps {
-  sheetRef: RefObject<HTMLElement | null>;
   ticks: TickMap;
   onToggle: ToggleTick;
 }
@@ -17,9 +16,9 @@ interface SheetProps {
  * The printable A4 page. Order matters: the released grid, then the Misc section
  * under the black rule, then Unreleased, then the artwork footer.
  */
-export function Sheet({ sheetRef, ticks, onToggle }: SheetProps): ReactNode {
+export function Sheet({ ticks, onToggle }: SheetProps): ReactNode {
   return (
-    <main className="sheet" ref={sheetRef}>
+    <main className="sheet">
       <SheetHeader />
       <FamilyGrid ticks={ticks} onToggle={onToggle} />
       <MiscSection ticks={ticks} onToggle={onToggle} />
