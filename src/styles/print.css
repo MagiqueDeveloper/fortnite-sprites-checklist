@@ -1,17 +1,15 @@
-/* Print the same page the preview shows. The sheet's padding becomes the page
-   margin, so the browser keeps the ink inside the printable area instead of
-   painting a full-bleed box the printer has to crop. */
+/* Print the same page the preview shows. Both the Print A4 button and Ctrl+P go
+   through these rules. The sheet's screen padding becomes the page margin, so the
+   browser keeps the ink inside the printable area. */
 
 @page{size:A4 portrait; margin:8mm} /* must equal --page-pad */
 
 @media print{
   html,body{background:#fff; margin:0; padding:0}
-  body > #root > :not(.sheet){display:none !important}
   .toolbar{display:none !important}
   .sheet{
-    width:auto; height:min(calc(var(--page-height) - 2 * var(--page-pad)), 100vh);
-    margin:0 !important; padding:0; box-shadow:none; border-radius:0; zoom:1 !important;
-    overflow:visible; break-inside:avoid;
+    width:auto; height:auto; min-height:279mm; /* 281mm printable, 2mm spare */ margin:0; padding:0; zoom:1;
+    box-shadow:none; border-radius:0; overflow:visible; break-inside:avoid;
   }
   *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
 }

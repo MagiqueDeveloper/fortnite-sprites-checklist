@@ -3,7 +3,6 @@ import { Sheet } from './components/Sheet';
 import { Toolbar } from './components/Toolbar';
 import { useFitSheet } from './hooks/useFitSheet';
 import { useTicks } from './hooks/useTicks';
-import { printSheet } from './lib/printSheet';
 
 /** Printable Fortnite Sprites checklist: floating controls plus a single A4 sheet. */
 export default function App(): ReactNode {
@@ -13,10 +12,7 @@ export default function App(): ReactNode {
   return (
     <>
       <Toolbar
-        onPrint={() => {
-          const sheet = sheetRef.current;
-          if (sheet) void printSheet(sheet);
-        }}
+        onPrint={() => window.print()}
         onReset={() => {
           if (window.confirm('Clear all ticks?')) reset();
         }}

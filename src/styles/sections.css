@@ -23,10 +23,6 @@
 .ucard img{width:20px; height:20px; object-fit:contain; flex:0 0 20px}
 .ucardtxt{flex:1; min-width:0}
 .ucard .n{font-size:8.2px; font-weight:800; line-height:1.2}
-.ucard .by{
-  font-size:6.9px; color:var(--muted); font-weight:600; line-height:1.2;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-}
 .ucard .q{
   width:20px; height:20px; flex:0 0 20px; border-radius:5px; background:#eef1f5; color:#8a93a1;
   display:grid; place-items:center; font-weight:900; font-size:12px;
