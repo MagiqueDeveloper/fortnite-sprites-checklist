@@ -6,7 +6,7 @@
 // Fortnite Wiki for the v42.20 crossover Sprites and the Bounty Hunter tier.
 
 export type Rarity = 'Rare' | 'Epic' | 'Legendary' | 'Mythic';
-export type VariantKey = 'base' | 'cm' | 'gold' | 'lh' | 'bh';
+export type VariantKey = 'base' | 'cm' | 'gold' | 'lh' | 'bh' | 'tt';
 export type TickKey = 'f' | 'm';
 
 export interface SpriteFamily {
@@ -43,6 +43,7 @@ export const VARIANTS: Record<VariantKey, { cls: string; label: (name: string) =
   gold: { cls: 'gold', label: (n) => `Gold ${n}` },
   lh: { cls: 'lh', label: (n) => `Loot Hacker ${n}` },
   bh: { cls: 'bh', label: (n) => `Bounty Hunter ${n}` },
+  tt: { cls: 'tt', label: (n) => `Trick or Treat ${n}` },
 };
 
 export const STORAGE_KEY = 'ch7s4-sprites-v4';
@@ -61,13 +62,17 @@ export const FAMILIES: SpriteFamily[] = [
   {"id": "shadow", "name": "Shadow", "rarity": "Epic", "ability": "Automatically reloads your weapons over time, even when unequipped", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/shadow/base.png", "sprites/shadow/cheat-master.png", "sprites/shadow/gold.png", "sprites/shadow/loot-hacker.png", "sprites/shadow/bounty-hunter.png"]},
   {"id": "pond", "name": "Pond", "rarity": "Epic", "ability": "Jump shortly after landing to launch a Super Jump, higher and more often with each Sprite Level", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/pond/base.png", "sprites/pond/cheat-master.png", "sprites/pond/gold.png", "sprites/pond/loot-hacker.png", "sprites/pond/bounty-hunter.png"]},
   {"id": "morgana", "name": "Morgana", "rarity": "Epic", "ability": "Increases the effectiveness of healing items, scaling with each level up. Persona 5 crossover", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/morgana/base.png", "sprites/morgana/cheat-master.png", "sprites/morgana/gold.png", "sprites/morgana/loot-hacker.png", "sprites/morgana/bounty-hunter.png"]},
+  {"id": "dumpster_dive", "name": "Dumpster Dive", "rarity": "Epic", "ability": "Food provides bonus healing; find food when jumping out of hiding props, with a small chance from containers. Finds better food with each level", "variants": ["base", "gold", "lh", "bh"], "imgs": ["sprites/dumpster_dive/base.png", "sprites/dumpster_dive/gold.png", "sprites/dumpster_dive/loot-hacker.png", "sprites/dumpster_dive/bounty-hunter.png"]},
   {"id": "killswitch", "name": "Killswitch", "rarity": "Legendary", "ability": "Grants Hangtime with improved accuracy: midair slow-mo aim, no weapon bloom", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/killswitch/base.png", "sprites/killswitch/cheat-master.png", "sprites/killswitch/gold.png", "sprites/killswitch/loot-hacker.png", "sprites/killswitch/bounty-hunter.png"]},
   {"id": "jackrabbit", "name": "Jackrabbit", "rarity": "Legendary", "ability": "Allows you to double-jump", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/jackrabbit/base.png", "sprites/jackrabbit/cheat-master.png", "sprites/jackrabbit/gold.png", "sprites/jackrabbit/loot-hacker.png", "sprites/jackrabbit/bounty-hunter.png"]},
   {"id": "x-ray", "name": "X-Ray", "rarity": "Legendary", "ability": "Periodically marks nearby enemies; frequency and radius increase with each level", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/x-ray/base.png", "sprites/x-ray/cheat-master.png", "sprites/x-ray/gold.png", "sprites/x-ray/loot-hacker.png", "sprites/x-ray/bounty-hunter.png"]},
   {"id": "blinky", "name": "Blinky", "rarity": "Legendary", "ability": "Grants you Cloak when you take damage, which increases with each level. Pac-Man crossover", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/blinky/base.png", "sprites/blinky/cheat-master.png", "sprites/blinky/gold.png", "sprites/blinky/loot-hacker.png", "sprites/blinky/bounty-hunter.png"]},
   {"id": "crash_bandicoot", "name": "Crash Bandicoot", "rarity": "Legendary", "ability": "Jump to trigger a whirlwind attack, which damages and knocks back enemies. Damage increases with each level.", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/crash_bandicoot/base.png", "sprites/crash_bandicoot/cheat-master.png", "sprites/crash_bandicoot/gold.png", "sprites/crash_bandicoot/loot-hacker.png", "sprites/crash_bandicoot/bounty-hunter.png"]},
+  {"id": "vampire", "name": "Vampire", "rarity": "Legendary", "ability": "Recover health when damaging an enemy; the share recovered grows with each level", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/vampire/base.png", "sprites/vampire/cheat-master.png", "sprites/vampire/gold.png", "sprites/vampire/loot-hacker.png", "sprites/vampire/bounty-hunter.png"]},
+  {"id": "the_deer", "name": "The Deer", "rarity": "Legendary", "ability": "Melee attacks deal more damage, increasing with each level", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/the_deer/base.png", "sprites/the_deer/cheat-master.png", "sprites/the_deer/gold.png", "sprites/the_deer/loot-hacker.png", "sprites/the_deer/bounty-hunter.png"]},
   {"id": "klombo", "name": "Klombo", "rarity": "Mythic", "ability": "Drops random items at each level; levels up only with consumables that grant Health or Shield", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/klombo/base.png", "sprites/klombo/cheat-master.png", "sprites/klombo/gold.png", "sprites/klombo/loot-hacker.png", "sprites/klombo/bounty-hunter.png"]},
-  {"id": "crown", "name": "Crown", "rarity": "Mythic", "ability": "Grants extra Crown Wins after a Victory Royale; levels up by winning matches", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/crown/base.png", "sprites/crown/cheat-master.png", "sprites/crown/gold.png", "sprites/crown/loot-hacker.png", "sprites/crown/bounty-hunter.png"]},
+  {"id": "crown", "name": "Crown", "rarity": "Mythic", "ability": "Grants extra Crown Wins after a Victory Royale; levels up by winning matches", "variants": ["base", "cm", "gold", "lh", "bh", "tt"], "imgs": ["sprites/crown/base.png", "sprites/crown/cheat-master.png", "sprites/crown/gold.png", "sprites/crown/loot-hacker.png", "sprites/crown/bounty-hunter.png", "sprites/crown/trick-or-treat.png"]},
+  {"id": "spooky_dash", "name": "Spooky Dash", "rarity": "Mythic", "ability": "Rechargeable dash that lets you phase through some objects; the charge cooldown shortens with each level", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/spooky_dash/base.png", "sprites/spooky_dash/cheat-master.png", "sprites/spooky_dash/gold.png", "sprites/spooky_dash/loot-hacker.png", "sprites/spooky_dash/bounty-hunter.png"]},
 ] as SpriteFamily[];
 
 // Released Sprites that ship without variants (single-card Misc section).
@@ -76,6 +81,6 @@ export const SINGLES: SpriteFamily[] = [
 ] as SpriteFamily[];
 
 export const UNRELEASED: UnreleasedSprite[] = [
-  {"name": "Dumpster Dive", "img": null, "badge": "das", "label": "By StinkyPrincessGoose", "by": "By StinkyPrincessGoose", "tip": "Design-A-Sprite Contest winner"},
+  {"name": "Obsession", "img": null, "badge": "new", "label": "Due Oct 15", "by": "", "tip": "Announced for October 15 alongside Honey"},
   {"name": "Honey", "img": null, "badge": "das", "label": "By Conejito_sam", "by": "By Conejito_sam", "tip": "Design-A-Sprite Contest winner. Bees swarm attackers"},
 ] as UnreleasedSprite[];

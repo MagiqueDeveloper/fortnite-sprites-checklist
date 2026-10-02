@@ -6,13 +6,13 @@ A printable A4 checklist for every Sprite variant in Fortnite Chapter 7 Season 4
 
 ## Features
 
-- **101 collectible Sprites** across 21 families, ordered by rarity left to right (Rare, Epic, Legendary, Mythic)
+- **121 collectible Sprites** across 25 families, ordered by rarity left to right (Rare, Epic, Legendary, Mythic)
 - **Five variants per family** where they exist: base, Cheat Master, Gold, Loot Hacker and Bounty Hunter. Mega Man ships base only
 - **Found / Mastered tick boxes** per variant, saved in `localStorage` and printed exactly as shown on screen
 - **Print A4 button** that runs the browser's normal print on the same page you see, as one A4 page for as long as the roster fits, then as extra pages (Ctrl+P gives the identical result)
 - **Misc section** under the black rule for released Sprites that ship without variants
 - **Unreleased section** for announced Sprites, badged with their status
-- **Fully offline:** all 101 sprite images ship in `public/sprites/`, so the page makes no external requests
+- **Fully offline:** all 121 sprite images ship in `public/sprites/`, so the page makes no external requests
 - **Offline ready after the first visit:** a service worker precaches the whole site, so later visits work with no connection at all
 - **Installable:** a web app manifest with icons, so it can be added to a phone home screen or desktop as its own window
 - **Phone-friendly:** below 820px wide the page switches from the A4 sheet to a single column (two on tablets) of large cards with big tap targets; printing always gives the A4 sheet
@@ -45,7 +45,7 @@ Browsers refuse to load ES modules from `file://` URLs, so serve `dist/` with an
 
 `public/sw.js` registers a service worker (production builds only, via `src/lib/registerServiceWorker.ts`). `vite build` stamps it (see `stampServiceWorker` in `vite.config.ts`) with a hash of the built files and the list of files to precache:
 
-- **Install** precaches the whole site (shell, hashed JS and CSS, all 101 sprites, icons) into a cache named after that hash.
+- **Install** precaches the whole site (shell, hashed JS and CSS, all 121 sprites, icons) into a cache named after that hash.
 - **Navigations** are network-first, so a redeploy is picked up while online, and fall back to the cached page when there is no connection.
 - **Everything else** is stale-while-revalidate: served from the cache instantly and refreshed in the background, so replaced sprite art shows up on the next visit even though sprite filenames are not content-hashed.
 - **Activate** deletes the caches of older builds, so there is nothing to bump by hand.
@@ -60,12 +60,11 @@ The result: visit once online, then the checklist opens and prints with the netw
 
 ### When the roster grows
 
-A row of four families is about 42mm tall, so a page holds 5 rows (20 families) at natural size. Past that the sheet adapts by itself:
+A row of four families is about 42mm tall, so a page holds 5 rows (20 families) at natural size, together with the Misc and Unreleased sections. Past that the sheet continues on further pages by itself (`src/lib/pages.ts`, 20 families per page). Later pages get a slim header, and Misc, Unreleased and the footer close the last page.
 
-- **21 to 24 families** stay on one page. `src/hooks/useSheetFit.ts` measures the content in a hidden desktop-width frame and sets a `--fit` scale (about 0.86 for a sixth row). Every length in `grid.css`, `sections.css` and `sheet.css` is written as a multiple of `--px` or `--mm`, which shrink with `--fit`. This is real layout rather than `zoom` or `transform`, because `zoom` printed stray blank pages in Chrome. Phones ignore the scale.
-- **More than 24 families** continue onto further A4 pages (`src/lib/pages.ts`, 24 per page). Later pages get a slim header, and Misc, Unreleased and the footer close the last page.
+`src/hooks/useSheetFit.ts` is the safety net for a page that is slightly too tall (for example a family with an extra tier): it measures the content in a hidden desktop-width frame and sets a `--fit` scale. Every length in `grid.css`, `sections.css` and `sheet.css` is written as a multiple of `--px` or `--mm`, which shrink with `--fit`. This is real layout rather than `zoom` or `transform`, because `zoom` printed stray blank pages in Chrome. Phones ignore the scale. Don't rely on it for more than a few percent: shrinking a whole extra row (about 80%) overflowed in WebKit, which lays a shrunken page out differently when printing.
 
-The two limits in `pages.ts` are the numbers to tune. Check a roster change in both Chrome and Safari/Orion: pad `FAMILIES` with copies, print, and confirm the page count.
+The two limits in `pages.ts` are the numbers to tune. Check a roster change in both Chrome and Safari/Orion: print, and confirm the page count and that the footer is on the last page.
 
 ## Project structure
 
@@ -105,7 +104,7 @@ src/
     sections.css               Misc and Unreleased sections, badges
     mobile.css                 Single-column phone and tablet layout (screen only)
     print.css                  @page and @media print rules
-public/sprites/                101 sprite images, sorted by family
+public/sprites/                121 sprite images, sorted by family
 public/sw.js                   Offline service worker (stamped with a build hash and precache list at build time)
 public/manifest.webmanifest    Installable app manifest
 public/icon-192.png            App icons (192, 512 and a maskable 512)
@@ -147,7 +146,7 @@ To add or replace art, drop a PNG in the matching folder (transparent background
 
 Rarities come from the Fortnite Wiki infoboxes, cross-checked against IGN's checklist, and abilities are taken from Epic's own patch notes. Only Sprites with a published rarity and available art are listed as released; anything unconfirmed stays in the Unreleased section rather than being guessed at.
 
-Bounty Hunter art and names come from IGN's checklist, and the tier is tracked for every released family. Birthday (Rare, live 26 Sep) and Morgana (Epic, live 24 Sep) joined the released roster with all five tiers, their art taken from the spritechecklist.org tracker. Only the Design-A-Sprite winners Dumpster Dive and Honey are still unreleased.
+Bounty Hunter art and names come from IGN's checklist, and the tier is tracked for every released family. Birthday (Rare, live 26 Sep) and Morgana (Epic, live 24 Sep) joined the released roster with all five tiers, their art taken from the spritechecklist.org tracker. The Fortnitemares update (1 Oct) added Spooky Dash (Mythic), Vampire and The Deer (Legendary) and Dumpster Dive (Epic, no Cheat Master tier), plus the Trick or Treat Crown, the only Trick or Treat tier live so far; the rest are due around 8 Oct. Art for these came from the spritechecklist.org tracker. Honey and Obsession (15 Oct) are the Unreleased entries.
 
 ## Hosting
 
