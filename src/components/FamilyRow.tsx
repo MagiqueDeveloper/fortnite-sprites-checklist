@@ -17,8 +17,6 @@ interface FamilyRowProps {
  * as a card (see mobile.css).
  */
 export function FamilyRow({ family, ticks, onToggle }: FamilyRowProps): ReactNode {
-  const done = family.variants.filter((variant) => ticks[`${family.id}__${variant}`]?.m).length;
-
   return (
     <div
       className="mrow"
@@ -30,9 +28,6 @@ export function FamilyRow({ family, ticks, onToggle }: FamilyRowProps): ReactNod
       <div className="who">
         <Name text={family.name} />
         <span className="rar">{family.rarity}</span>
-        <span className={`tally${done === family.variants.length ? ' full' : ''}`}>
-          {done}/{family.variants.length}
-        </span>
       </div>
       {COLUMNS.map((tier) =>
         family.variants.includes(tier.key) ? (

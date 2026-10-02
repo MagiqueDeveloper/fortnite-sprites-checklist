@@ -44,7 +44,6 @@
   .mrow:last-child{border-bottom:1px solid var(--line)}
   .who{padding:0 4px 8px}
   .name{font-size:17px}
-  .tally{font-size:12px}
 
   .tcell{justify-content:flex-start; gap:10px; margin:0 0 4px; padding:6px; border-radius:10px}
   .tcell.empty{display:none}

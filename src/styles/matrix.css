@@ -64,12 +64,6 @@
 }
 .who .rar{display:none}
 .rar{font-weight:900; letter-spacing:.14em; text-transform:uppercase; color:var(--rar)}
-/* mastered-of-total counter: screen only, the paper copy starts blank */
-.tally{
-  flex:0 0 auto; font-size:calc(6.6 * var(--px)); font-weight:800; color:var(--faint);
-  font-variant-numeric:tabular-nums;
-}
-.tally.full{color:var(--rar)}
 
 /* one variant: art, then the F / M boxes */
 .tcell{

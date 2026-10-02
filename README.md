@@ -9,7 +9,7 @@ A printable A4 checklist for every Sprite variant in Fortnite Chapter 7 Season 4
 - **121 collectible Sprites** across 25 families, one row per family, banded by rarity (Rare, Epic, Legendary, Mythic) with a coloured rail down the left
 - **A column per tier:** Base, Cheat Master, Gold, Loot Hacker, Bounty Hunter and Trick or Treat. Tiers a family doesn't have show a dash
 - **F / M tick boxes** (Found / Mastered) per variant, saved in `localStorage` and printed exactly as shown on screen
-- **Live progress** in the top bar: Found and Mastered counts out of 121, plus a mastered tally beside each family on screen
+- **Live progress** in the top bar: Found and Mastered counts out of 121
 - **Print A4 button** that runs the browser's normal print on the same page you see, as one A4 page for as long as the roster fits, then as extra pages (Ctrl+P gives the identical result)
 - **Misc section** under the black rule for released Sprites that ship without variants
 - **Unreleased section** for announced Sprites and variant waves, badged with their status
