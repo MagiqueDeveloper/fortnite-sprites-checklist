@@ -1,8 +1,11 @@
 import { useLayoutEffect, type RefObject } from 'react';
 
 const MM = 96 / 25.4;
-/** Content height a page may use, in CSS px. The print sheet is 268mm tall; the last 4mm are spare. */
-const AVAILABLE_PX = 264 * MM;
+/**
+ * Content height a page may use, in CSS px. The print sheet is 268mm tall, but WebKit prints
+ * a page about 6% taller than this screen measurement, so aim lower to leave room.
+ */
+const AVAILABLE_PX = 250 * MM;
 const MIN_FIT = 0.5; // sanity floor only; src/lib/pages.ts splits the sheet long before this
 
 /** Fired after every pass, so text fitted to the old scale (Name.tsx) can fit again. */
@@ -10,7 +13,7 @@ export const SHEET_FIT_EVENT = 'sheetfit';
 
 /**
  * Height the sheet's content needs at its current scale: the children plus their explicit
- * margins. The grid's `margin-bottom:auto` is left out on purpose; it only holds the
+ * margins. The table's `margin-bottom:auto` is left out on purpose; it only holds the
  * spare space.
  */
 function naturalHeight(sheet: HTMLElement): number {
@@ -18,7 +21,7 @@ function naturalHeight(sheet: HTMLElement): number {
   for (const child of Array.from(sheet.children)) {
     const style = getComputedStyle(child);
     total += child.getBoundingClientRect().height + parseFloat(style.marginTop);
-    if (!child.classList.contains('grid')) total += parseFloat(style.marginBottom);
+    if (!child.classList.contains('matrix')) total += parseFloat(style.marginBottom);
   }
   return total;
 }

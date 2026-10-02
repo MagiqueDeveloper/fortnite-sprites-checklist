@@ -1,13 +1,26 @@
-/* The two tail sections: released single-variant Sprites, then unreleased ones. */
+/* The tail sections: released single-variant Sprites, then unreleased ones. */
 
 /* misc: released Sprites that ship without variants, introduced by the black rule */
 .misc{break-inside:avoid; margin-top:calc(2.6 * var(--mm)); border-top:calc(2 * var(--px)) solid var(--ink); padding-top:calc(1.8 * var(--mm))}
 .misc .unhead .bar{background:var(--ink)}
-.singlecards{display:grid; grid-template-columns:repeat(4,1fr); gap:calc(1.3 * var(--mm))}
-/* the family header sits inside the card, in place of a plain title */
-.singlecards .famhead{margin-bottom:0; gap:calc(5 * var(--px))}
-.singlecards .famhead h2{font-size:calc(8.4 * var(--px))}
-.singlecards .famhead .rar{font-size:calc(5.9 * var(--px))}
+.singlecards{display:grid; grid-template-columns:repeat(4,1fr); column-gap:calc(1.4 * var(--mm)); row-gap:calc(.9 * var(--mm))}
+.scard{
+  display:flex; align-items:center; gap:calc(6 * var(--px)); min-width:0;
+  border:calc(1 * var(--px)) solid var(--line); border-radius:calc(6 * var(--px)); background:#fff;
+  padding:calc(4 * var(--px)) calc(6 * var(--px));
+}
+.scard .icon{width:calc(20 * var(--px)); height:calc(20 * var(--px))}
+.smeta{flex:1; min-width:0; display:flex; flex-direction:column; justify-content:center; gap:calc(2 * var(--px))}
+.smeta .name{flex:0 0 auto; font-size:calc(8.2 * var(--px)); line-height:1.2}
+/* name over a rarity rule that fades out, the same mark as the table's rails */
+.rarline{display:flex; align-items:center; gap:calc(4 * var(--px))}
+.rarline .rar{font-size:calc(5.9 * var(--px)); flex:0 0 auto}
+.rarline .rule{
+  flex:1; height:calc(1 * var(--px)); min-width:calc(4 * var(--px)); border-radius:calc(1 * var(--px));
+  background:linear-gradient(90deg, var(--rar), var(--line)); order:1;
+}
+/* the F / M boxes match the table's */
+.scard .checks{flex:0 0 auto}
 
 .unreleased{break-inside:avoid; margin-top:calc(2.6 * var(--mm)); border-top:calc(1 * var(--px)) solid var(--line); padding-top:calc(1.8 * var(--mm))}
 .unhead{display:flex; align-items:center; gap:calc(4 * var(--px)); margin-bottom:calc(1.5 * var(--mm))}
@@ -24,7 +37,8 @@
 .ucardtxt{flex:1; min-width:0}
 .ucard .n{font-size:calc(8.2 * var(--px)); font-weight:800; line-height:1.2}
 .ucard .q{
-  width:calc(20 * var(--px)); height:calc(20 * var(--px)); flex:0 0 calc(20 * var(--px)); border-radius:calc(5 * var(--px)); background:#eef1f5; color:#8a93a1;
+  width:calc(20 * var(--px)); height:calc(20 * var(--px)); flex:0 0 calc(20 * var(--px)); border-radius:calc(5 * var(--px)); background:#fff; color:#8a93a1;
+  border:calc(1.5 * var(--px)) dotted #eef1f5;
   display:grid; place-items:center; font-weight:900; font-size:calc(12 * var(--px));
 }
 

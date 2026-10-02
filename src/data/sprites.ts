@@ -37,14 +37,21 @@ export const RARITY_COLOURS: Record<Rarity, string> = {
   Mythic: '#ff4d6d',
 };
 
-export const VARIANTS: Record<VariantKey, { cls: string; label: (name: string) => string }> = {
-  base: { cls: '', label: (n) => n },
-  cm: { cls: 'cheat', label: (n) => `Cheat Master ${n}` },
-  gold: { cls: 'gold', label: (n) => `Gold ${n}` },
-  lh: { cls: 'lh', label: (n) => `Loot Hacker ${n}` },
-  bh: { cls: 'bh', label: (n) => `Bounty Hunter ${n}` },
-  tt: { cls: 'tt', label: (n) => `Trick or Treat ${n}` },
-};
+/** The tier columns, in sheet order. */
+export const TIERS: { key: VariantKey; label: string }[] = [
+  { key: 'base', label: 'Base' },
+  { key: 'cm', label: 'Cheat Master' },
+  { key: 'gold', label: 'Gold' },
+  { key: 'lh', label: 'Loot Hacker' },
+  { key: 'bh', label: 'Bounty Hunter' },
+  { key: 'tt', label: 'Trick or Treat' },
+];
+
+/** Full name of one variant, as it appears in game: "Cheat Master Onigiri". */
+export function variantName(variant: VariantKey, family: string): string {
+  const tier = TIERS.find((t) => t.key === variant)?.label;
+  return variant === 'base' || !tier ? family : `${tier} ${family}`;
+}
 
 export const STORAGE_KEY = 'ch7s4-sprites-v4';
 
@@ -75,12 +82,13 @@ export const FAMILIES: SpriteFamily[] = [
   {"id": "spooky_dash", "name": "Spooky Dash", "rarity": "Mythic", "ability": "Rechargeable dash that lets you phase through some objects; the charge cooldown shortens with each level", "variants": ["base", "cm", "gold", "lh", "bh"], "imgs": ["sprites/spooky_dash/base.png", "sprites/spooky_dash/cheat-master.png", "sprites/spooky_dash/gold.png", "sprites/spooky_dash/loot-hacker.png", "sprites/spooky_dash/bounty-hunter.png"]},
 ] as SpriteFamily[];
 
-// Released Sprites that ship without variants (single-card Misc section).
+// Released Sprites that ship without variants (single cards in the Misc section).
 export const SINGLES: SpriteFamily[] = [
   {"id": "mega_man", "name": "Mega Man", "rarity": "Rare", "ability": "Slide around like Mega Man, with slide length increased per level", "variants": ["base"], "imgs": ["sprites/mega_man/base.png"]},
 ] as SpriteFamily[];
 
 export const UNRELEASED: UnreleasedSprite[] = [
+  {"name": "Trick or Treat Variants", "img": "sprites/crown/trick-or-treat.png", "badge": "new", "label": "Due Oct 8", "by": "", "tip": "The other 23 Trick or Treat variants arrive October 8 from Fortnitemares Cheat Codes. Only the Crown is out so far"},
   {"name": "Obsession", "img": null, "badge": "new", "label": "Due Oct 15", "by": "", "tip": "Announced for October 15 alongside Honey"},
   {"name": "Honey", "img": null, "badge": "das", "label": "By Conejito_sam", "by": "By Conejito_sam", "tip": "Design-A-Sprite Contest winner. Bees swarm attackers"},
 ] as UnreleasedSprite[];

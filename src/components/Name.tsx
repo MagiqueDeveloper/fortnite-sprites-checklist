@@ -5,10 +5,10 @@ const MIN_SCALE = 0.6; // floor, as a share of the CSS size, so very long names 
 
 /**
  * Sprite name that always occupies a single line. It starts at the size set in CSS
- * and shrinks until it fits, so long variants such as "Loot Hacker Crash Bandicoot"
- * never wrap onto a second line and make the card taller.
+ * and shrinks until it fits, so long family names such as "Crash Bandicoot" never
+ * wrap onto a second line and make the row taller.
  */
-export function Name({ text, variantClass }: { text: string; variantClass?: string }): ReactNode {
+export function Name({ text }: { text: string }): ReactNode {
   const ref = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -21,7 +21,7 @@ export function Name({ text, variantClass }: { text: string; variantClass?: stri
       const available = el.clientWidth;
       const needed = el.scrollWidth;
       if (available > 0 && needed > available) {
-        const scaled = Math.max(base * MIN_SCALE, (base * available) / needed);
+        const scaled = Math.max(base * MIN_SCALE, (base * available * 0.97) / needed); // 3% slack for subpixel rounding
         el.style.fontSize = `${Math.floor(scaled * 100) / 100}px`;
       }
     };
@@ -42,7 +42,7 @@ export function Name({ text, variantClass }: { text: string; variantClass?: stri
   }, [text]);
 
   return (
-    <div ref={ref} className={variantClass ? `name ${variantClass}` : 'name'} title={text}>
+    <div ref={ref} className="name" title={text}>
       {text}
     </div>
   );

@@ -1,9 +1,12 @@
 /* Design tokens and page-level defaults. */
 
 :root{
-  --ink:#171a21; --muted:#6b7280; --line:#e2e5ea; --soft:#f4f5f7;
-  --rare:#2f7fe4; --epic:#9b4dff; --leg:#ff9d2e; --myth:#ff4d6d; --ghost:#5b6472;
-  --cheat:#1f9d3a; --gold:#b8860b; --lh:#d92e50;
+  --ink:#12141a; --ink-2:#3b4150; --muted:#6b7280; --faint:#a3a9b5; --line:#e4e7ec; --soft:#f5f6f8;
+  --desk:#e7e9ee;
+  --rare:#2f7fe4; --epic:#9b4dff; --leg:#f59a23; --myth:#ff4d6d; --ghost:#5b6472;
+  /* tier accents for the column heads, matched to each variant's art: Cheat Master green,
+     Gold yellow, Loot Hacker blue, Bounty Hunter purple, Trick or Treat pumpkin orange */
+  --t-base:#9aa1ad; --t-cm:#2f9e3c; --t-gold:#e0b021; --t-lh:#4f7fe6; --t-bh:#a23fd8; --t-tt:#f07a1c;
   /* One page box for the preview and the print. 8mm of padding keeps the ink
      inside the band a printer can actually mark. */
   --page-width:210mm; --page-height:297mm; --page-pad:8mm;
@@ -11,10 +14,11 @@
 
 *{box-sizing:border-box; margin:0; padding:0}
 
-html,body{background:#eceef1}
+html,body{background:var(--desk)}
 
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   color:var(--ink);
-  padding:76px 12px 44px; /* clears the floating toolbar */
+  padding:84px 16px 48px; /* clears the fixed top bar */
+  -webkit-font-smoothing:antialiased;
 }

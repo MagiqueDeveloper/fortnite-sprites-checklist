@@ -1,10 +1,11 @@
-/* The A4 pages themselves: masthead, counters and footer. */
+/* The A4 pages themselves: masthead and footer. */
 
-.sheets{display:flex; flex-direction:column; gap:14px}
+.sheets{display:flex; flex-direction:column; gap:20px}
 
 .sheet{
   width:var(--page-width); min-height:var(--page-height); margin:0 auto; background:#fff;
-  padding:var(--page-pad); box-shadow:0 10px 40px rgba(20,24,40,.18); border-radius:2px;
+  padding:var(--page-pad); border-radius:3px;
+  box-shadow:0 1px 2px rgba(18,20,26,.08), 0 16px 48px rgba(18,20,26,.14);
   display:flex; flex-direction:column;
 }
 
@@ -14,24 +15,39 @@
 .sheet{--px:calc(1px * var(--fit, 1)); --mm:calc(1mm * var(--fit, 1))}
 
 .head{
-  display:flex; justify-content:space-between; align-items:flex-start; gap:calc(8 * var(--mm));
-  border-bottom:calc(2 * var(--px)) solid var(--ink); padding-bottom:calc(2.4 * var(--mm)); margin-bottom:calc(2.6 * var(--mm));
+  display:flex; justify-content:space-between; align-items:flex-end; gap:calc(8 * var(--mm));
+  border-bottom:calc(2.5 * var(--px)) solid var(--ink);
+  padding-bottom:calc(2.6 * var(--mm)); margin-bottom:calc(1.6 * var(--mm));
 }
 .logo{
-  font-size:calc(29 * var(--px)); font-weight:900; font-style:italic; letter-spacing:calc(.5 * var(--px)); color:var(--ink);
-  text-shadow:calc(2 * var(--px)) 0 0 #38e1ff, calc(-2 * var(--px)) 0 0 #ff5bd6, calc(1.5 * var(--px)) calc(1.5 * var(--px)) 0 #ffd34d; line-height:1;
+  font-size:calc(32 * var(--px)); font-weight:900; font-style:italic; letter-spacing:calc(.5 * var(--px));
+  color:var(--ink); line-height:.95;
+  text-shadow:calc(2 * var(--px)) 0 0 #38e1ff, calc(-2 * var(--px)) 0 0 #ff5bd6, calc(1.5 * var(--px)) calc(1.5 * var(--px)) 0 #ffd34d;
 }
+.kicker{
+  margin-top:calc(1.6 * var(--mm)); font-size:calc(8 * var(--px)); font-weight:900;
+  letter-spacing:.2em; text-transform:uppercase;
+}
+.kicker span{color:var(--muted); font-weight:700; letter-spacing:.12em; margin-left:calc(4 * var(--px))}
+.kicker span::before{content:"/"; margin-right:calc(4 * var(--px)); color:var(--faint)}
+
+.stats{display:flex; gap:calc(5 * var(--mm))}
+.stat{display:flex; flex-direction:column; align-items:flex-end; line-height:1}
+.stat + .stat{border-left:calc(1 * var(--px)) solid var(--line); padding-left:calc(5 * var(--mm))}
+.stat b{font-size:calc(22 * var(--px)); font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-.01em}
+.stat span{
+  margin-top:calc(1 * var(--mm)); font-size:calc(6.5 * var(--px)); font-weight:800;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+}
+
 /* slim strip that opens the second and later pages */
 .head.cont{align-items:center}
 .head.cont .logo{font-size:calc(18 * var(--px))}
-.head.cont .sub{margin-top:0; font-size:calc(8.6 * var(--px))}
-.stats{text-align:right}
-.bigcount{font-size:calc(18 * var(--px)); font-weight:900; line-height:1}
-.bigcount em{font-style:normal; font-weight:800; text-transform:uppercase; letter-spacing:.06em; font-size:calc(11.5 * var(--px))}
-.sub{font-size:calc(8.2 * var(--px)); color:var(--muted); font-weight:600; margin-top:calc(2 * var(--px))}
+.sub{font-size:calc(8.2 * var(--px)); color:var(--muted); font-weight:700}
 
 .foot{
-  margin-top:calc(2.2 * var(--mm)); border-top:calc(1 * var(--px)) solid var(--line); padding-top:calc(1.5 * var(--mm)); display:flex;
-  justify-content:space-between; gap:calc(6 * var(--mm)); font-size:calc(6.6 * var(--px)); color:var(--muted); line-height:1.4;
+  margin-top:calc(2.4 * var(--mm)); border-top:calc(1 * var(--px)) solid var(--line); padding-top:calc(1.6 * var(--mm));
+  display:flex; justify-content:space-between; gap:calc(6 * var(--mm));
+  font-size:calc(6.6 * var(--px)); color:var(--muted); line-height:1.4;
 }
-.foot .r{text-align:right; font-weight:700; white-space:nowrap}
+.foot .r{text-align:right; font-weight:800; white-space:nowrap; letter-spacing:.04em}

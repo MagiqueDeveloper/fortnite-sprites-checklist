@@ -6,16 +6,17 @@ A printable A4 checklist for every Sprite variant in Fortnite Chapter 7 Season 4
 
 ## Features
 
-- **121 collectible Sprites** across 25 families, ordered by rarity left to right (Rare, Epic, Legendary, Mythic)
-- **Five variants per family** where they exist: base, Cheat Master, Gold, Loot Hacker and Bounty Hunter. Mega Man ships base only
-- **Found / Mastered tick boxes** per variant, saved in `localStorage` and printed exactly as shown on screen
+- **121 collectible Sprites** across 25 families, one row per family, banded by rarity (Rare, Epic, Legendary, Mythic) with a coloured rail down the left
+- **A column per tier:** Base, Cheat Master, Gold, Loot Hacker, Bounty Hunter and Trick or Treat. Tiers a family doesn't have show a dash
+- **F / M tick boxes** (Found / Mastered) per variant, saved in `localStorage` and printed exactly as shown on screen
+- **Live progress** in the top bar: Found and Mastered counts out of 121, plus a mastered tally beside each family on screen
 - **Print A4 button** that runs the browser's normal print on the same page you see, as one A4 page for as long as the roster fits, then as extra pages (Ctrl+P gives the identical result)
 - **Misc section** under the black rule for released Sprites that ship without variants
-- **Unreleased section** for announced Sprites, badged with their status
+- **Unreleased section** for announced Sprites and variant waves, badged with their status
 - **Fully offline:** all 121 sprite images ship in `public/sprites/`, so the page makes no external requests
 - **Offline ready after the first visit:** a service worker precaches the whole site, so later visits work with no connection at all
 - **Installable:** a web app manifest with icons, so it can be added to a phone home screen or desktop as its own window
-- **Phone-friendly:** below 820px wide the page switches from the A4 sheet to a single column (two on tablets) of large cards with big tap targets; printing always gives the A4 sheet
+- **Phone-friendly:** below 820px wide the page switches from the A4 sheet to a single column (two on tablets) of family cards with big tap targets; printing always gives the A4 sheet
 - **Self-fitting names:** long variants such as "Loot Hacker Crash Bandicoot" shrink to stay on one line
 
 Keyboard accessible: each tick box is a focusable `role="checkbox"` that responds to Space and Enter.
@@ -56,13 +57,13 @@ The result: visit once online, then the checklist opens and prints with the netw
 
 ## Printing
 
-`Print A4` calls `window.print()`, so it is exactly what Ctrl+P does. `print.css` sets `@page` to A4 with an 8mm margin, hides the toolbar and ignores the phone layout (which is screen-only), so the output is a true A4 page whatever the window width. The sheet's 8mm screen padding matches that margin, so the preview and the paper share the same content box. The sheet is a flex column, so the Misc section, the Unreleased section and the credit line are always pinned to the foot of the page: any spare height becomes a gap under the family grid (`margin-bottom:auto` on `.grid`). In print the sheet is a fixed 268mm tall, 13mm short of the 281mm printable area. That slack matters: WebKit (Safari, Orion) lays the page out a little taller than Chrome, and a sheet sized to the full page pushed the footer onto a second page there. If you add content, check that it still prints on one page in Chrome and Safari.
+`Print A4` calls `window.print()`, so it is exactly what Ctrl+P does. `print.css` sets `@page` to A4 with an 8mm margin, hides the toolbar and ignores the phone layout (which is screen-only), so the output is a true A4 page whatever the window width. The sheet's 8mm screen padding matches that margin, so the preview and the paper share the same content box. The sheet is a flex column, so the Misc section, the Unreleased section and the credit line are always pinned to the foot of the page: any spare height becomes a gap under the table (`margin-bottom:auto` on `.matrix`). In print the sheet is a fixed 268mm tall, 13mm short of the 281mm printable area. That slack matters: WebKit (Safari, Orion) lays the page out a little taller than Chrome, and a sheet sized to the full page pushed the footer onto a second page there. If you add content, check that it still prints on one page in Chrome and Safari.
 
 ### When the roster grows
 
-A row of four families is about 42mm tall, so a page holds 5 rows (20 families) at natural size, together with the Misc and Unreleased sections. Past that the sheet continues on further pages by itself (`src/lib/pages.ts`, 20 families per page). Later pages get a slim header, and Misc, Unreleased and the footer close the last page.
+A family row is about 8.4mm tall, so a page holds around 24 families at natural size, together with the Misc and Unreleased sections. Past that the sheet continues on further pages by itself (`src/lib/pages.ts`). Later pages get a slim header, and Misc, Unreleased and the footer close the last page.
 
-`src/hooks/useSheetFit.ts` is the safety net for a page that is slightly too tall (for example a family with an extra tier): it measures the content in a hidden desktop-width frame and sets a `--fit` scale. Every length in `grid.css`, `sections.css` and `sheet.css` is written as a multiple of `--px` or `--mm`, which shrink with `--fit`. This is real layout rather than `zoom` or `transform`, because `zoom` printed stray blank pages in Chrome. Phones ignore the scale. Don't rely on it for more than a few percent: shrinking a whole extra row (about 80%) overflowed in WebKit, which lays a shrunken page out differently when printing.
+`src/hooks/useSheetFit.ts` is the safety net for a page that is slightly too tall (for example a family with an extra tier): it measures the content in a hidden desktop-width frame and sets a `--fit` scale. Every length in `matrix.css`, `sections.css` and `sheet.css` is written as a multiple of `--px` or `--mm`, which shrink with `--fit`. This is real layout rather than `zoom` or `transform`, because `zoom` printed stray blank pages in Chrome. Phones ignore the scale. Don't rely on it for more than a few percent: shrinking a whole extra row (about 80%) overflowed in WebKit, which lays a shrunken page out differently when printing.
 
 The two limits in `pages.ts` are the numbers to tune. Check a roster change in both Chrome and Safari/Orion: print, and confirm the page count and that the footer is on the last page.
 
@@ -76,15 +77,15 @@ src/
   types.ts                     Shared types (ToggleTick)
   data/sprites.ts              Typed roster: families, variants, rarities, abilities, image paths
   components/
-    Sheet.tsx                  The A4 pages: header, grid, Misc, Unreleased, footer
+    Sheet.tsx                  The A4 pages: header, table, Misc, Unreleased, footer
     SheetHeader.tsx            OVERRIDE wordmark and the collectible counters
     SheetFooter.tsx            Artwork credit and season marker
-    Toolbar.tsx                Print A4 / Reset controls
-    FamilyGrid.tsx             Four-column rarity-ordered grid
-    FamilyBlock.tsx            One family: rarity header plus its variant cards
-    SpriteCard.tsx             One variant: art, name, Found / Mastered
-    SingleSpriteCard.tsx       A released Sprite with no variants
+    Toolbar.tsx                Top bar: live progress plus Print A4 / Reset
+    FamilyTable.tsx            Tier column heads and the rarity bands
+    FamilyRow.tsx              One family: name, then a cell per tier column
+    VariantCell.tsx            One variant: art plus its F / M boxes
     MiscSection.tsx            Single-variant Sprites, under the black rule
+    SingleSpriteCard.tsx       One Misc card: art, name, rarity, Found / Mastered
     UnreleasedSection.tsx      Announced Sprites and their status badges
     Tick.tsx                   One Found / Mastered checkbox
     Name.tsx                   Auto-shrinking single-line sprite name
@@ -93,14 +94,15 @@ src/
     useSheetFit.ts             Measures each page and sets its --fit scale so it fits one A4 sheet
   lib/
     asset.ts                   Resolve data paths against the deploy base URL
+    layout.ts                  Tier columns, the Misc list, rarity bands
     pages.ts                   How many families fit per A4 page
     registerServiceWorker.ts   Register the offline worker in production builds
   styles/
     index.css                  Ordered entry point for the stylesheets below
     base.css                   Design tokens and page defaults
-    toolbar.css                Floating controls
+    toolbar.css                Top progress bar and controls
     sheet.css                  The A4 page, masthead and footer
-    grid.css                   Families, cards, names and tick boxes
+    matrix.css                 Tier columns, rarity bands, family rows and tick boxes
     sections.css               Misc and Unreleased sections, badges
     mobile.css                 Single-column phone and tablet layout (screen only)
     print.css                  @page and @media print rules

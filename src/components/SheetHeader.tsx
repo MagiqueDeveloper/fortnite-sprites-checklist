@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { FAMILIES, SINGLES } from '../data/sprites';
+import { ALL_IDS } from '../lib/layout';
 
 interface SheetHeaderProps {
   page: number;
@@ -11,32 +12,37 @@ export function SheetHeader({ page, pages }: SheetHeaderProps): ReactNode {
   if (page > 1) {
     return (
       <header className="head cont">
-        <div className="logo" data-text="OVERRIDE">
-          OVERRIDE
-        </div>
+        <div className="logo">OVERRIDE</div>
         <div className="sub">
           Sprites checklist · page {page} of {pages}
         </div>
       </header>
     );
   }
-  const total = [...FAMILIES, ...SINGLES].reduce((sum, family) => sum + family.variants.length, 0);
 
   return (
     <header className="head">
       <div className="brand">
-        <div className="logo" data-text="OVERRIDE">
-          OVERRIDE
+        <div className="logo">OVERRIDE</div>
+        <div className="kicker">
+          Sprites Checklist <span>Chapter 7 · Season 4</span>
         </div>
       </div>
       <div className="stats">
-        <div className="bigcount">
-          <span>{total}</span> <em>Collectible Sprites</em>
+        <div className="stat">
+          <b>{ALL_IDS.length}</b>
+          <span>Sprites</span>
         </div>
-        <div className="sub">
-          {FAMILIES.length + SINGLES.length} sprite families · {total} available variants
-          {pages > 1 ? ` · page 1 of ${pages}` : ''}
+        <div className="stat">
+          <b>{FAMILIES.length + SINGLES.length}</b>
+          <span>Families</span>
         </div>
+        {pages > 1 && (
+          <div className="stat">
+            <b>1/{pages}</b>
+            <span>Page</span>
+          </div>
+        )}
       </div>
     </header>
   );

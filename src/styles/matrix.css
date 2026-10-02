@@ -1,0 +1,103 @@
+/* Released Sprites: a row per family, a column per tier. Rows are banded by rarity, each
+   band led by a coloured rail. Spare page height goes below the table, so Misc, Unreleased
+   and the footer sit at the foot of the page. Every length is a multiple of --px or --mm,
+   which the sheet shrinks together when a page runs long. */
+
+.matrix{
+  --rail:calc(4.6 * var(--mm)); --rail-gap:calc(1.6 * var(--mm)); --who:calc(29 * var(--mm));
+  --col-gap:calc(1.2 * var(--mm)); --row-h:calc(8.4 * var(--mm));
+  display:flex; flex-direction:column; gap:calc(1.1 * var(--mm)); flex:0 0 auto; margin-bottom:auto;
+}
+
+.mhead,.mrow{display:grid; column-gap:var(--col-gap); align-items:stretch}
+.mhead{grid-template-columns:calc(var(--rail) + var(--rail-gap) + var(--who)) repeat(var(--cols), minmax(0, 1fr))}
+.mrow{grid-template-columns:var(--who) repeat(var(--cols), minmax(0, 1fr))}
+
+/* column heads: tier name over a tier-coloured underline */
+.mhead{align-items:end; padding-top:calc(.6 * var(--mm))}
+.mhead > div:not(.mhead-key){
+  font-size:calc(7 * var(--px)); font-weight:900; text-transform:uppercase; letter-spacing:.12em;
+  text-align:center; padding-bottom:calc(1.1 * var(--mm));
+  border-bottom:calc(2 * var(--px)) solid var(--tier, var(--ink));
+}
+.tier-base{--tier:var(--t-base)} .tier-cm{--tier:var(--t-cm)} .tier-gold{--tier:var(--t-gold)}
+.tier-lh{--tier:var(--t-lh)} .tier-bh{--tier:var(--t-bh)} .tier-tt{--tier:var(--t-tt)}
+
+/* legend for the boxes, in the corner above the names */
+.mhead-key{
+  display:flex; gap:calc(3 * var(--mm)); padding-bottom:calc(1.1 * var(--mm));
+  font-size:calc(6.6 * var(--px)); font-weight:700; color:var(--muted);
+}
+.mhead-key span{display:inline-flex; align-items:center; gap:calc(1.2 * var(--mm))}
+.mhead-key b{
+  width:calc(3.4 * var(--mm)); height:calc(3.4 * var(--mm)); display:grid; place-items:center;
+  border:calc(1.2 * var(--px)) solid var(--ink-2); border-radius:calc(.8 * var(--mm));
+  font-size:calc(5.6 * var(--px)); font-weight:900; color:var(--ink-2);
+}
+
+/* rarity band: rail on the left, rows on the right. The rail is the rarity name in its
+   colour, then a hairline fading from that colour to grey, so it costs almost no ink. */
+.band{display:flex; gap:var(--rail-gap); break-inside:avoid}
+.rail{
+  flex:0 0 var(--rail); display:flex; flex-direction:column; align-items:center;
+  gap:calc(1.2 * var(--mm)); padding:calc(1 * var(--mm)) 0;
+}
+.rail span{
+  writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap;
+  font-size:calc(6.4 * var(--px)); font-weight:900; letter-spacing:.2em; text-transform:uppercase; color:var(--rar);
+}
+.rail::after{
+  content:""; flex:1; width:calc(1.5 * var(--px)); border-radius:calc(1 * var(--px));
+  background:linear-gradient(180deg, var(--rar), var(--line));
+}
+.rows{flex:1; min-width:0; display:flex; flex-direction:column}
+
+.mrow{height:var(--row-h); border-bottom:calc(1 * var(--px)) solid var(--line)}
+.mrow:last-child{border-bottom:0}
+
+/* family label */
+.who{min-width:0; display:flex; align-items:center; gap:calc(1.5 * var(--mm))}
+/* size is set by src/components/Name.tsx, which shrinks long names to one line */
+.name{
+  flex:1; min-width:0; font-size:calc(9.2 * var(--px)); font-weight:900; text-transform:uppercase;
+  letter-spacing:.02em; line-height:1.15; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.who .rar{display:none}
+.rar{font-weight:900; letter-spacing:.14em; text-transform:uppercase; color:var(--rar)}
+/* mastered-of-total counter: screen only, the paper copy starts blank */
+.tally{
+  flex:0 0 auto; font-size:calc(6.6 * var(--px)); font-weight:800; color:var(--faint);
+  font-variant-numeric:tabular-nums;
+}
+.tally.full{color:var(--rar)}
+
+/* one variant: art, then the F / M boxes */
+.tcell{
+  display:flex; align-items:center; justify-content:center; gap:calc(1.6 * var(--mm)); min-width:0;
+  padding:0 calc(1 * var(--mm)); margin:calc(.5 * var(--mm)) 0;
+}
+.tcell.empty::before{content:""; width:calc(3 * var(--mm)); height:calc(1 * var(--px)); background:var(--line)}
+.icon{
+  width:calc(6.6 * var(--mm)); height:calc(6.6 * var(--mm)); flex:0 0 auto; display:grid; place-items:center;
+}
+.icon img{width:100%; height:100%; object-fit:contain; display:block}
+.tiername{display:none}
+
+.checks{display:flex; gap:calc(1.2 * var(--mm)); min-width:0}
+.chk{
+  display:inline-flex; align-items:center; gap:calc(1 * var(--mm)); cursor:pointer; user-select:none;
+  border-radius:calc(1 * var(--mm)); -webkit-tap-highlight-color:transparent;
+}
+.chk .lbl{display:none}
+.chk i{
+  width:calc(4.2 * var(--mm)); height:calc(4.2 * var(--mm)); flex:0 0 auto; display:grid; place-items:center;
+  border:calc(1.3 * var(--px)) solid var(--ink-2); border-radius:calc(1 * var(--mm)); background:#fff;
+  font-style:normal; transition:background .12s, border-color .12s;
+}
+.chk i::after{
+  content:attr(data-l); font-size:calc(6.4 * var(--px)); font-weight:900; color:var(--faint); line-height:1;
+}
+.chk:hover i{border-color:var(--ink)}
+.chk.on i{background:var(--ink); border-color:var(--ink)}
+.chk.on i::after{content:"✓"; color:#fff; font-size:calc(9 * var(--px))}
+.chk:focus-visible{outline:calc(2 * var(--px)) solid var(--rare); outline-offset:calc(1 * var(--px))}
