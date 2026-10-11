@@ -88,7 +88,6 @@ export const SINGLES: SpriteFamily[] = [
 ] as SpriteFamily[];
 
 export const UNRELEASED: UnreleasedSprite[] = [
-  {"name": "Trick or Treat Variants", "img": "sprites/crown/trick-or-treat.png", "badge": "new", "label": "Due Oct 8", "by": "", "tip": "The other 23 Trick or Treat variants arrive October 8 from Fortnitemares Cheat Codes. Only the Crown is out so far"},
   {"name": "Obsession", "img": null, "badge": "new", "label": "Due Oct 15", "by": "", "tip": "Announced for October 15 alongside Honey"},
   {"name": "Honey", "img": null, "badge": "das", "label": "By Conejito_sam", "by": "By Conejito_sam", "tip": "Design-A-Sprite Contest winner. Bees swarm attackers"},
 ] as UnreleasedSprite[];
