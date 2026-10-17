@@ -18,11 +18,7 @@ export function SingleSpriteCard({ family, ticks, onToggle }: SingleSpriteCardPr
   const row = ticks[id] ?? {};
 
   return (
-    <div
-      className="scard"
-      title={`${name} · ${family.ability}`}
-      style={{ '--rar': RARITY_COLOURS[family.rarity] } as CSSProperties}
-    >
+    <div className="scard" style={{ '--rar': RARITY_COLOURS[family.rarity] } as CSSProperties}>
       <span className="icon">
         <img
           src={asset(family.imgs[0])}

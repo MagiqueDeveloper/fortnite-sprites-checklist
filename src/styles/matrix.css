@@ -21,7 +21,7 @@
   border-bottom:calc(2 * var(--px)) solid var(--tier, var(--ink));
 }
 .tier-base{--tier:var(--t-base)} .tier-cm{--tier:var(--t-cm)} .tier-gold{--tier:var(--t-gold)}
-.tier-lh{--tier:var(--t-lh)} .tier-bh{--tier:var(--t-bh)} .tier-tt{--tier:var(--t-tt)}
+.tier-lh{--tier:var(--t-lh)} .tier-bh{--tier:var(--t-bh)} .tier-tt{--tier:var(--t-tt)} .tier-qk{--tier:var(--t-qk)}
 
 /* legend for the boxes, in the corner above the names */
 .mhead-key{
