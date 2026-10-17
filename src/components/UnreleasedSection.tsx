@@ -4,7 +4,7 @@ import { asset } from '../lib/asset';
 
 function UnreleasedCard({ sprite }: { sprite: UnreleasedSprite }): ReactNode {
   return (
-    <div className="ucard" title={sprite.tip}>
+    <div className="ucard">
       {sprite.img ? <img src={asset(sprite.img)} alt={sprite.name} /> : <span className="q">?</span>}
       <div className="ucardtxt">
         <div className="n">{sprite.name}</div>
@@ -18,6 +18,7 @@ function UnreleasedCard({ sprite }: { sprite: UnreleasedSprite }): ReactNode {
 
 /** Sprites that are announced but not in the game yet. No ticks, no muted copy. */
 export function UnreleasedSection(): ReactNode {
+  if (UNRELEASED.length === 0) return null;
   return (
     <section className="unreleased">
       <div className="unhead">

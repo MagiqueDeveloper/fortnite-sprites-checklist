@@ -22,7 +22,6 @@ export function FamilyRow({ family, ticks, onToggle }: FamilyRowProps): ReactNod
       className="mrow"
       role="group"
       aria-label={family.name}
-      title={family.ability}
       style={{ '--rar': RARITY_COLOURS[family.rarity] } as CSSProperties}
     >
       <div className="who">

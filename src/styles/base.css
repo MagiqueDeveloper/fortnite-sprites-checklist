@@ -5,8 +5,9 @@
   --desk:#e7e9ee;
   --rare:#2f7fe4; --epic:#9b4dff; --leg:#f59a23; --myth:#ff4d6d; --ghost:#5b6472;
   /* tier accents for the column heads, matched to each variant's art: Cheat Master green,
-     Gold yellow, Loot Hacker blue, Bounty Hunter purple, Trick or Treat pumpkin orange */
-  --t-base:#9aa1ad; --t-cm:#2f9e3c; --t-gold:#e0b021; --t-lh:#4f7fe6; --t-bh:#a23fd8; --t-tt:#f07a1c;
+     Gold yellow, Loot Hacker blue, Bounty Hunter purple, Trick or Treat pumpkin orange,
+     Quack periwinkle */
+  --t-base:#9aa1ad; --t-cm:#2f9e3c; --t-gold:#e0b021; --t-lh:#4f7fe6; --t-bh:#a23fd8; --t-tt:#f07a1c; --t-qk:#8b89d9;
   /* One page box for the preview and the print. 8mm of padding keeps the ink
      inside the band a printer can actually mark. */
   --page-width:210mm; --page-height:297mm; --page-pad:8mm;
