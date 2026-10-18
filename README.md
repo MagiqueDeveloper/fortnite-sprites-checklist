@@ -110,7 +110,9 @@ public/sprites/                162 sprite images, sorted by family
 public/sw.js                   Offline service worker (stamped with a build hash and precache list at build time)
 public/manifest.webmanifest    Installable app manifest
 public/icon-192.png            App icons (192, 512 and a maskable 512)
-.github/workflows/deploy.yml   Type-checks, builds and publishes dist/ to GitHub Pages
+.github/workflows/deploy.yml       Type-checks, builds and publishes dist/ to GitHub Pages
+.github/workflows/sync-sprites.yml Friday 02:00 UTC sync from spritechecklist.org + IGN
+scripts/sync_sprites.py            Roster + art sync used by the workflow above
 ```
 
 ## Sprite image layout
@@ -148,9 +150,22 @@ Quack is `quack.png` inside `bush`, `adventure`, `jonesy`, `klombo` and `spooky_
 
 ## Rarity sources
 
-Rarities come from the Fortnite Wiki infoboxes, cross-checked against IGN's checklist, and abilities are taken from Epic's own patch notes. Only Sprites with a published rarity and available art are listed as released; anything unconfirmed stays in the Unreleased section rather than being guessed at.
+Rarities come from the Fortnite Wiki infoboxes, cross-checked against IGN's checklist and spritechecklist.org, and abilities are taken from Epic's own patch notes. Only Sprites with a published rarity and available art are listed as released; anything unconfirmed stays in the Unreleased section rather than being guessed at. The weekly sync prefers spritechecklist.org when those sources agree a rarity should change (Overshield is Rare).
 
 Bounty Hunter art and names come from IGN's checklist, and the tier is tracked for every released family. Birthday (Rare, live 26 Sep) and Morgana (Epic, live 24 Sep) joined the released roster with all five tiers, their art taken from the spritechecklist.org tracker. The Fortnitemares update (1 Oct) added Spooky Dash (Mythic), Vampire and The Deer (Legendary) and Dumpster Dive (Epic), and the Trick or Treat tier followed (v42.30, tracker updated 8 Oct) for every family with variants. The tracker also lists a Cheat Master Dumpster Dive, which an earlier pass had left out. v42.40 (15 Oct) released Honey (Epic, Design-A-Sprite by Conejito_sam) and One Wish Willow (Mythic, the Obsession crossover), each with all six forms, plus Quack Bush, Adventure, Jonesy, Klombo and Spooky Dash from the final Sprite Mastery rewards. Quack is a seventh column; every other family shows a dash there. Nothing is left in Unreleased. Art for all of these came from the spritechecklist.org tracker, resized to 150px to match the rest.
+
+## Keeping the roster current
+
+`scripts/sync_sprites.py` pulls the Season 4 Override roster and art from [spritechecklist.org](https://spritechecklist.org/), cross-checks family names and variants against [IGN’s Sprites checklist](https://www.ign.com/wikis/fortnite/Sprites_Checklist_and_Guide_(Chapter_7_Season_4)_-_All_Variants_and_Mastery_Rewards_List), resizes new art to 150×150 PNGs under `public/sprites/`, and rewrites `FAMILIES` / `SINGLES` in `src/data/sprites.ts`. Existing ability text is kept unless you pass `--update-abilities`.
+
+```bash
+pip install -r scripts/requirements.txt
+npm run sync-sprites:dry   # report only
+npm run sync-sprites       # write roster + any missing art
+python3 scripts/sync_sprites.py --refresh-images   # also re-pull existing PNGs
+```
+
+`.github/workflows/sync-sprites.yml` runs that sync every **Friday at 02:00 UTC** (and on `workflow_dispatch`). When something changed it builds, pushes a commit to `main`, and deploys GitHub Pages in the same run. To drive the same check from a Cursor Automation instead (or as well), paste the prompt in `.github/cursor-automation-prompt.md` at [cursor.com/automations](https://cursor.com/automations/new) with cron `0 2 * * 5`.
 
 ## Hosting
 
