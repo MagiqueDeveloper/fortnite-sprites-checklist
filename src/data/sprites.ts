@@ -4,6 +4,7 @@
 // so every sprite is served from this project and the sheet works fully offline.
 // Artwork is property of Epic Games. The v42.40 Sprites (Honey, One Wish Willow
 // and the Quack tier) come from the spritechecklist.org tracker, resized to 150px.
+// Weekly updates: scripts/sync_sprites.py (Friday 02:00 UTC via sync-sprites.yml).
 
 export type Rarity = 'Rare' | 'Epic' | 'Legendary' | 'Mythic';
 export type VariantKey = 'base' | 'cm' | 'gold' | 'lh' | 'bh' | 'tt' | 'qk';
