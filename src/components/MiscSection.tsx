@@ -17,7 +17,7 @@ export function MiscSection({ ticks, onToggle }: MiscSectionProps): ReactNode {
     <section className="misc">
       <div className="unhead">
         <i className="bar" />
-        <h2>Misc Sprites</h2>
+        <h2>Single-form Sprites</h2>
         <span className="rar">SINGLE VARIANT</span>
       </div>
       <div className="singlecards">

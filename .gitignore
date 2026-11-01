@@ -7,3 +7,8 @@ dist
 # kept locally only, not part of the published site
 reference/
 docs/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example

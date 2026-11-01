@@ -1,42 +1,37 @@
-import { useCallback, useEffect, useState } from 'react';
-import { STORAGE_KEY, type TickMap } from '../data/sprites';
-import type { ToggleTick } from '../types';
+import { useCallback, useEffect, useState } from "react";
+import { STORAGE_KEY, type TickMap } from "../data/sprites";
+import { ALL_IDS } from "../lib/layout";
+import { sanitizeTicks, toggleTick } from "../lib/progress";
+import type { ToggleTick } from "../types";
 
 function readStoredTicks(): TickMap {
   try {
-    const parsed: unknown = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
-    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? (parsed as TickMap) : {};
+    return sanitizeTicks(
+      JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "{}"),
+      ALL_IDS,
+    );
   } catch {
     return {};
   }
 }
-
-/**
- * Found / Mastered ticks, persisted to localStorage.
- * Mastered implies Found; clearing Found clears Mastered.
- */
 export function useTicks() {
   const [ticks, setTicks] = useState<TickMap>(readStoredTicks);
-
+  const [saved, setSaved] = useState(true);
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(ticks));
+      setSaved(true);
     } catch {
-      /* storage unavailable (private mode, restricted origins) */
+      setSaved(false);
     }
   }, [ticks]);
-
   const toggle = useCallback<ToggleTick>((id, kind) => {
-    setTicks((prev) => {
-      const row = { ...(prev[id] ?? {}) };
-      row[kind] = !row[kind];
-      if (kind === 'm' && row.m) row.f = true;
-      if (kind === 'f' && !row.f) row.m = false;
-      return { ...prev, [id]: row };
-    });
+    if (ALL_IDS.includes(id)) setTicks((prev) => toggleTick(prev, id, kind));
   }, []);
-
   const reset = useCallback(() => setTicks({}), []);
-
-  return { ticks, toggle, reset };
+  const restore = useCallback(
+    (value: unknown) => setTicks(sanitizeTicks(value, ALL_IDS)),
+    [],
+  );
+  return { ticks, toggle, reset, restore, saved };
 }

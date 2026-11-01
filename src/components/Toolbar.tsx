@@ -34,7 +34,7 @@ export function Toolbar({ ticks, onPrint, onReset }: ToolbarProps): ReactNode {
   return (
     <div className="toolbar no-print">
       <div className="tb-brand">
-        <b>OVERRIDE</b>
+        <b>TREASURE HUNTERS</b>
         <span>Sprites</span>
       </div>
       <div className="meters">

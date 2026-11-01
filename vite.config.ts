@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { defineConfig, type Plugin, type ResolvedConfig } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -26,6 +26,12 @@ function stampServiceWorker(): Plugin {
     },
     closeBundle() {
       const outDir = join(config.root, config.build.outDir);
+      // Retain archive art in Git without shipping it in the current offline cache.
+      const roster: { imgs: string[] }[] = JSON.parse(readFileSync(join(config.root, 'src/data/treasure-hunters.json'), 'utf8'));
+      const activeArt = new Set(roster.flatMap(family => family.imgs));
+      for (const file of listFiles(outDir)) {
+        if (file.startsWith('sprites/') && !activeArt.has(file)) rmSync(join(outDir, file));
+      }
       const files = listFiles(outDir).filter((file) => file !== 'sw.js');
       const hash = createHash('sha256');
       for (const file of files) hash.update(file).update(readFileSync(join(outDir, file)));
