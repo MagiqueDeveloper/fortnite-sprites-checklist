@@ -1,0 +1,174 @@
+[
+  {
+    "id": "barry-ofish",
+    "name": "Barry O'Fish",
+    "rarity": "Rare",
+    "ability": "Use less stamina sprinting in water, and gain a Slap effect at max level.",
+    "variants": [
+      "base",
+      "fortune",
+      "cursed"
+    ],
+    "imgs": [
+      "sprites/barry-ofish/base.png",
+      "sprites/barry-ofish/fortune.png",
+      "sprites/barry-ofish/cursed.png"
+    ]
+  },
+  {
+    "id": "halfpeeld",
+    "name": "Halfpeel'd",
+    "rarity": "Rare",
+    "ability": "Marks eliminations on the map, with a detection range that grows each level.",
+    "variants": [
+      "base",
+      "fortune",
+      "cursed"
+    ],
+    "imgs": [
+      "sprites/halfpeeld/base.png",
+      "sprites/halfpeeld/fortune.png",
+      "sprites/halfpeeld/cursed.png"
+    ]
+  },
+  {
+    "id": "re-pete",
+    "name": "Re-Pete",
+    "rarity": "Rare",
+    "ability": "Reload faster, with a chance to get ammo back.",
+    "variants": [
+      "base",
+      "fortune",
+      "cursed"
+    ],
+    "imgs": [
+      "sprites/re-pete/base.png",
+      "sprites/re-pete/fortune.png",
+      "sprites/re-pete/cursed.png"
+    ]
+  },
+  {
+    "id": "kelper",
+    "name": "Kelper",
+    "rarity": "Epic",
+    "ability": "Heals you over time in water, with bigger heals each level.",
+    "variants": [
+      "base",
+      "fortune",
+      "cursed"
+    ],
+    "imgs": [
+      "sprites/kelper/base.png",
+      "sprites/kelper/fortune.png",
+      "sprites/kelper/cursed.png"
+    ]
+  },
+  {
+    "id": "wayfinder",
+    "name": "Wayfinder",
+    "rarity": "Epic",
+    "ability": "Shows nearby Sprites and adds extra loot to Buried Chests.",
+    "variants": [
+      "base",
+      "fortune",
+      "cursed"
+    ],
+    "imgs": [
+      "sprites/wayfinder/base.png",
+      "sprites/wayfinder/fortune.png",
+      "sprites/wayfinder/cursed.png"
+    ]
+  },
+  {
+    "id": "chester",
+    "name": "Chester",
+    "rarity": "Legendary",
+    "ability": "Chests may spawn extra loot, and fall damage is cancelled.",
+    "variants": [
+      "base",
+      "fortune",
+      "cursed"
+    ],
+    "imgs": [
+      "sprites/chester/base.png",
+      "sprites/chester/fortune.png",
+      "sprites/chester/cursed.png"
+    ]
+  },
+  {
+    "id": "exmarks",
+    "name": "Exmarks",
+    "rarity": "Legendary",
+    "ability": "Shows nearby Treasure Maps and Wanted Posters, and spawns a Treasure Map at max level.",
+    "variants": [
+      "base",
+      "fortune",
+      "cursed"
+    ],
+    "imgs": [
+      "sprites/exmarks/base.png",
+      "sprites/exmarks/fortune.png",
+      "sprites/exmarks/cursed.png"
+    ]
+  },
+  {
+    "id": "lil-flacko",
+    "name": "Lil' Flacko",
+    "rarity": "Legendary",
+    "ability": "Landing makes a small shockwave that knocks opponents back.",
+    "variants": [
+      "base",
+      "fortune",
+      "cursed"
+    ],
+    "imgs": [
+      "sprites/lil-flacko/base.png",
+      "sprites/lil-flacko/fortune.png",
+      "sprites/lil-flacko/cursed.png"
+    ]
+  },
+  {
+    "id": "lil-squibbly",
+    "name": "Lil' Squibbly",
+    "rarity": "Legendary",
+    "ability": "Jump into fishing holes for fish and bonus loot.",
+    "variants": [
+      "base",
+      "fortune",
+      "cursed"
+    ],
+    "imgs": [
+      "sprites/lil-squibbly/base.png",
+      "sprites/lil-squibbly/fortune.png",
+      "sprites/lil-squibbly/cursed.png"
+    ]
+  },
+  {
+    "id": "plundarrgh",
+    "name": "Plundarrgh",
+    "rarity": "Mythic",
+    "ability": "Opening Chests boosts your Pickaxe and movement speed.",
+    "variants": [
+      "base",
+      "fortune",
+      "cursed"
+    ],
+    "imgs": [
+      "sprites/plundarrgh/base.png",
+      "sprites/plundarrgh/fortune.png",
+      "sprites/plundarrgh/cursed.png"
+    ]
+  },
+  {
+    "id": "sweet-dreams",
+    "name": "Sweet Dreams",
+    "rarity": "Mythic",
+    "ability": "Grants a random item each level-up, with Mythic loot at max level.",
+    "variants": [
+      "base"
+    ],
+    "imgs": [
+      "sprites/sweet-dreams/base.png"
+    ]
+  }
+]

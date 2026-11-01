@@ -7,12 +7,12 @@ interface SheetHeaderProps {
   pages: number;
 }
 
-/** Masthead: OVERRIDE wordmark plus the collectible counters. Later pages get a slim strip. */
+/** Masthead: TREASURE HUNTERS wordmark plus the collectible counters. Later pages get a slim strip. */
 export function SheetHeader({ page, pages }: SheetHeaderProps): ReactNode {
   if (page > 1) {
     return (
       <header className="head cont">
-        <div className="logo">OVERRIDE</div>
+        <div className="logo">TREASURE HUNTERS</div>
         <div className="sub">
           Sprites checklist · page {page} of {pages}
         </div>
@@ -23,9 +23,9 @@ export function SheetHeader({ page, pages }: SheetHeaderProps): ReactNode {
   return (
     <header className="head">
       <div className="brand">
-        <div className="logo">OVERRIDE</div>
+        <div className="logo">TREASURE HUNTERS</div>
         <div className="kicker">
-          Sprites Checklist <span>Chapter 7 · Season 4</span>
+          Sprites Checklist <span>Chapter 7 · Mini Season</span>
         </div>
       </div>
       <div className="stats">

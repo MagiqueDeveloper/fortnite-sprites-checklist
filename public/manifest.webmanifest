@@ -1,12 +1,12 @@
 {
-  "name": "Fortnite Sprites Checklist (Chapter 7 Season 4)",
+  "name": "Fortnite Sprites Checklist (Treasure Hunters)",
   "short_name": "Sprite Checklist",
-  "description": "Printable A4 checklist for every Fortnite Chapter 7 Season 4 Sprite variant. Works offline.",
+  "description": "Printable A4 checklist for every Fortnite Treasure Hunters Sprite variant. Works offline.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#eceef1",
-  "theme_color": "#171a21",
+  "background_color": "#f7f5ee",
+  "theme_color": "#203e36",
   "icons": [
     {
       "src": "./icon-192.png",

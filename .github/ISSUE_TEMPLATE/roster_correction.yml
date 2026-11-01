@@ -1,0 +1,15 @@
+name: Roster correction
+description: Suggest a sourced Sprite, rarity, image, or availability correction.
+body:
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed correction
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Supporting source URL
+    validations:
+      required: true
