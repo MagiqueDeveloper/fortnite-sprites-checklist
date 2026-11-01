@@ -23,3 +23,13 @@ The old images remain in source for archival purposes. Application dependencies
 retain their own licenses, available in their installed packages.
 
 Epic's Fan Content Policy: https://www.epicgames.com/site/en-US/fan-art-policy
+
+## Treasure Hunters logo
+
+Official Epic Games season logo, mirrored by Fortnite.GG:
+https://fortnite.gg/assets?id=7314
+Original download: https://fnggcdn.com/assets/EwbRd8.png
+Retrieved 1 November 2026. Stored unmodified in
+`public/branding/treasure-hunters.png`. The page uses an SVG viewBox to omit
+transparent padding and CSS grayscale when printing. This third-party artwork
+is excluded from the MIT license.
