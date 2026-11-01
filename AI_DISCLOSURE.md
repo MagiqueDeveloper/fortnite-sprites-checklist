@@ -11,6 +11,6 @@ review and understand any AI-assisted submission and disclose substantial AI use
 in its pull request.
 
 The application does not call an AI service, send collection progress to an AI
-provider, or require an AI account. Collection progress stays in your browser
-unless you explicitly export it. Fortnite artwork is sourced from the references
+provider, or require an AI account. Collection progress stays in your browser and is not sent to this project’s
+servers. Fortnite artwork is sourced from the references
 in THIRD_PARTY_NOTICES.md; it is not presented as AI-generated artwork.

@@ -12,7 +12,7 @@ export function SheetHeader({ page, pages }: SheetHeaderProps): ReactNode {
   if (page > 1) {
     return (
       <header className="head cont">
-        <div className="logo">TREASURE HUNTERS</div>
+        <h1 className="logo">TREASURE HUNTERS</h1>
         <div className="sub">
           Sprites checklist · page {page} of {pages}
         </div>
@@ -23,7 +23,7 @@ export function SheetHeader({ page, pages }: SheetHeaderProps): ReactNode {
   return (
     <header className="head">
       <div className="brand">
-        <div className="logo">TREASURE HUNTERS</div>
+        <h1 className="logo">TREASURE HUNTERS</h1>
         <div className="kicker">
           Sprites Checklist <span>Chapter 7 · Mini Season</span>
         </div>

@@ -29,9 +29,5 @@ export function useTicks() {
     if (ALL_IDS.includes(id)) setTicks((prev) => toggleTick(prev, id, kind));
   }, []);
   const reset = useCallback(() => setTicks({}), []);
-  const restore = useCallback(
-    (value: unknown) => setTicks(sanitizeTicks(value, ALL_IDS)),
-    [],
-  );
-  return { ticks, toggle, reset, restore, saved };
+  return { ticks, toggle, reset, saved };
 }

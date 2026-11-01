@@ -5,7 +5,7 @@
 
 .matrix{
   --rail:calc(4.6 * var(--mm)); --rail-gap:calc(1.6 * var(--mm)); --who:calc(29 * var(--mm));
-  --col-gap:calc(1.2 * var(--mm)); --row-h:calc(8.4 * var(--mm));
+  --col-gap:calc(1.2 * var(--mm)); --row-h:calc(16 * var(--mm));
   display:flex; flex-direction:column; gap:calc(1.1 * var(--mm)); flex:0 0 auto; margin-bottom:auto;
 }
 
@@ -72,7 +72,7 @@
 }
 .tcell.empty::before{content:""; width:calc(3 * var(--mm)); height:calc(1 * var(--px)); background:var(--line)}
 .icon{
-  width:calc(6.6 * var(--mm)); height:calc(6.6 * var(--mm)); flex:0 0 auto; display:grid; place-items:center;
+  width:calc(11 * var(--mm)); height:calc(11 * var(--mm)); flex:0 0 auto; display:grid; place-items:center;
 }
 .icon img{width:100%; height:100%; object-fit:contain; display:block}
 .tiername{display:none}
@@ -95,3 +95,5 @@
 .chk.on i{background:var(--ink); border-color:var(--ink)}
 .chk.on i::after{content:"✓"; color:#fff; font-size:calc(9 * var(--px))}
 .chk:focus-visible{outline:calc(2 * var(--px)) solid var(--rare); outline-offset:calc(1 * var(--px))}
+
+.tier-fortune{--tier:var(--t-fortune)} .tier-cursed{--tier:var(--t-cursed)}
