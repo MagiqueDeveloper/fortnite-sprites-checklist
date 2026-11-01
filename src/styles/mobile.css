@@ -22,7 +22,7 @@
   }
 
   .head{flex-wrap:wrap; align-items:flex-end; gap:12px; padding-bottom:14px; margin-bottom:16px}
-  .logo{font-size:34px}
+  .logo{font-size:25px; letter-spacing:0}
   .kicker{font-size:11px; margin-top:8px}
   .kicker span{display:block; margin:4px 0 0}
   .kicker span::before{content:none}
@@ -50,7 +50,7 @@
   .icon{width:40px; height:40px}
   .tiername{display:block; flex:1; min-width:0; font-size:14px; font-weight:800; line-height:1.2}
   .checks{gap:2px}
-  .chk{gap:6px; padding:8px 5px; border-radius:8px; font-size:13px; font-weight:700; color:var(--ink-2)}
+  .chk{min-height:44px; gap:6px; padding:8px 5px; border-radius:8px; font-size:13px; font-weight:700; color:var(--ink-2)}
   .chk .lbl{display:inline}
   .chk.on{color:var(--ink)}
   .chk i{width:24px; height:24px; border-width:2px; border-radius:7px}

@@ -1,13 +1,10 @@
 import type { SpriteFamily } from '../data/sprites';
 
-/**
- * How the rows (one per family) are spread over A4 pages. A row is about 8.6mm tall, so
- * a page holds around 24 rows at full size together with the Misc and Unreleased sections; a few
- * more shrink the page slightly (see useSheetFit.ts). Past that, the table continues on
- * a second page. If a roster change ever prints badly, these two numbers are the ones to tune.
+/** Larger three-form rows keep the current roster readable on A4.
+ * Leave room for the header, single-form section, and footer on each page.
  */
-export const SINGLE_PAGE_MAX = 26; // up to this many rows share one page with the tail
-export const PAGE_MAX = 26; // rows per page once the sheet spills onto more pages
+export const SINGLE_PAGE_MAX = 14;
+export const PAGE_MAX = 14;
 
 /** Splits the roster into pages of rows, keeping rarity order. */
 export function paginate(families: readonly SpriteFamily[]): SpriteFamily[][] {

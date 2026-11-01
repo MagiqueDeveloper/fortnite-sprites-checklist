@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 export function SheetFooter(): ReactNode {
   return (
     <footer className="foot">
-      <div>Sprite artwork © Epic Games. Rarity and variant names as they appear in-game.</div>
+      <div>Sprite artwork © Epic Games. Unofficial fan checklist. Rarities provisional.</div>
       <div className="r">Chapter 7 · Treasure Hunters</div>
     </footer>
   );

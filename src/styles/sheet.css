@@ -20,9 +20,8 @@
   padding-bottom:calc(2.6 * var(--mm)); margin-bottom:calc(1.6 * var(--mm));
 }
 .logo{
-  font-size:calc(32 * var(--px)); font-weight:900; font-style:italic; letter-spacing:calc(.5 * var(--px));
+  font-size:calc(26 * var(--px)); font-weight:900; letter-spacing:calc(.5 * var(--px));
   color:var(--ink); line-height:.95;
-  text-shadow:calc(2 * var(--px)) 0 0 #38e1ff, calc(-2 * var(--px)) 0 0 #ff5bd6, calc(1.5 * var(--px)) calc(1.5 * var(--px)) 0 #ffd34d;
 }
 .kicker{
   margin-top:calc(1.6 * var(--mm)); font-size:calc(8 * var(--px)); font-weight:900;
@@ -51,3 +50,8 @@
   font-size:calc(6.6 * var(--px)); color:var(--muted); line-height:1.4;
 }
 .foot .r{text-align:right; font-weight:800; white-space:nowrap; letter-spacing:.04em}
+
+/* Plain supporting notes stay outside the printable checklist. */
+.app-note{max-width:var(--page-width); margin:18px auto 0; color:var(--muted); font-size:11px; line-height:1.7; text-align:center}
+.app-note a{color:inherit; text-underline-offset:2px}
+.storage-warning{max-width:var(--page-width); margin:0 auto 16px; padding:12px; background:#fff4dc; color:#63430b; font-size:13px}

@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "Offline Fortnite Treasure Hunters Sprite collection tracker and printable A4 checklist",
+  "description": "Printable A4 Fortnite Treasure Hunters Sprite checklist with offline progress",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
