@@ -57,7 +57,9 @@ removes both offline files and saved ticks. The manifest supports browser instal
 
 Desktop shows the printable sheet immediately. Narrow screens use the existing
 compact family layout with larger tap targets. Print A4 and Ctrl/Cmd+P always
-produce the complete A4 roster with current ticks.
+produce the complete A4 roster with current ticks. Print uses natural block flow
+rather than a fixed-height flex sheet, avoiding WebKit’s extra-page overflow.
+The official season logo is hosted locally and prints in grayscale.
 Serve the build over HTTP rather than opening index.html from a file URL.
 
 ## Roster maintenance
@@ -107,3 +109,18 @@ The maintainer is [MagiqueDeveloper](https://github.com/MagiqueDeveloper).
 `.mailmap` normalizes historical author identities, including AI tool identities,
 without rewriting published history. Historical co-author trailers remain in raw
 commits; GitHub controls how and when contributor attribution is refreshed.
+
+### WebKit print regression check
+
+CI prints the real page through native WebKitGTK, then checks that the PDF is one
+A4 page with every Sprite family and the footer. This exercises pagination, rather
+than emulating print CSS in another browser. To run it on Linux, install
+`libwebkitgtk-6.0-4`, `xvfb`, `xauth`, and `poppler-utils`, start `npm run preview`,
+and run:
+
+```sh
+GTK_PRINT_BACKENDS=file GSETTINGS_BACKEND=memory xvfb-run -a python3 scripts/check_webkit_print.py
+```
+
+This is WebKitGTK coverage; Safari's platform-specific print dialog still needs a
+manual check on macOS/iOS.

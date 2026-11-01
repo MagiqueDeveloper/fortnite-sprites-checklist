@@ -23,3 +23,34 @@ jobs:
       - run: pip install -r scripts/requirements.txt
       - run: npm test
       - run: npm run build
+
+  webkit-print:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install native WebKit printing tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkitgtk-6.0-4 xvfb xauth poppler-utils
+      - run: npm ci
+      - run: npm run build
+      - name: Verify one-page A4 output in native WebKit
+        env:
+          GTK_PRINT_BACKENDS: file
+          GSETTINGS_BACKEND: memory
+          WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS: '1'
+        run: |
+          set -euo pipefail
+          npm run preview -- --host 127.0.0.1 > "$RUNNER_TEMP/preview.log" 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          for attempt in {1..40}; do
+            if curl --silent --fail http://127.0.0.1:4173/ > /dev/null; then break; fi
+            sleep 0.25
+          done
+          curl --silent --fail http://127.0.0.1:4173/ > /dev/null
+          xvfb-run -a python3 scripts/check_webkit_print.py --output "$RUNNER_TEMP/checklist-webkit.pdf"

@@ -7,14 +7,16 @@
 @media print{
   html,body{background:#fff; margin:0; padding:0}
   .no-print{display:none !important}
-  /* One page tall, 13mm short of the printable 281mm as slack for engine differences.
-     The table's bottom auto margin absorbs the spare height, so Misc, Unreleased and the
-     credit line sit at the foot of the page exactly as they do in the preview. */
+  /* WebKit can fragment a fixed-height flex sheet onto a second page even when
+     its contents fit. Print in normal block flow; screen-only A4 sizing and the
+     table's automatic spacer must not contribute to the printed page height. */
   .sheet{
-    width:auto; height:268mm; min-height:0; margin:0; padding:0;
+    display:block; width:auto; height:auto; min-height:0; margin:0; padding:0;
     box-shadow:none; border-radius:0; overflow:visible;
   }
-  .sheets{display:block}
+  .sheets{display:block; gap:0}
+  .matrix{margin-bottom:0}
+  .season-logo{filter:grayscale(1); -webkit-filter:grayscale(1)}
   .sheet + .sheet{break-before:page}
   *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
 }

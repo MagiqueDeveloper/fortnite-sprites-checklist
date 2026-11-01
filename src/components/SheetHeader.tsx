@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { FAMILIES, SINGLES } from '../data/sprites';
 import { ALL_IDS } from '../lib/layout';
+import { SeasonLogo } from './SeasonLogo';
 
 interface SheetHeaderProps {
   page: number;
@@ -12,7 +13,7 @@ export function SheetHeader({ page, pages }: SheetHeaderProps): ReactNode {
   if (page > 1) {
     return (
       <header className="head cont">
-        <h1 className="logo">TREASURE HUNTERS</h1>
+        <h1 className="logo"><SeasonLogo /></h1>
         <div className="sub">
           Sprites checklist · page {page} of {pages}
         </div>
@@ -23,7 +24,7 @@ export function SheetHeader({ page, pages }: SheetHeaderProps): ReactNode {
   return (
     <header className="head">
       <div className="brand">
-        <h1 className="logo">TREASURE HUNTERS</h1>
+        <h1 className="logo"><SeasonLogo /></h1>
         <div className="kicker">
           Sprites Checklist <span>Chapter 7 · Mini Season</span>
         </div>

@@ -55,3 +55,7 @@
 .app-note{max-width:var(--page-width); margin:18px auto 0; color:var(--muted); font-size:11px; line-height:1.7; text-align:center}
 .app-note a{color:inherit; text-underline-offset:2px}
 .storage-warning{max-width:var(--page-width); margin:0 auto 16px; padding:12px; background:#fff4dc; color:#63430b; font-size:13px}
+
+.season-logo{display:block; width:calc(350 * var(--px)); max-width:100%; height:auto; aspect-ratio:2640 / 733}
+.head.cont .season-logo{width:calc(180 * var(--px))}
+.brand{min-width:0}
